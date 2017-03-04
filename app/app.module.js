@@ -3,5 +3,5 @@
 angular.module('walletsApp', [
   'ngRoute',
   'userList',
-  'userDetail',
+  'userDetail'
 ]);

@@ -1,12 +1,29 @@
-angular.
-  module('core.user').
-  factory('User', ['$resource',
-    function($resource) {
-      return $resource('https://livedemo.xsolla.com/fe/test-task/baev/users?offset=0&limit=5', {}, {
-        query: {
-          method: 'GET',
-          isObject: true
-        }
-      });
+angular.module('core.user')
+  .factory('User', [
+    'api',
+    '$http',
+    function (api, $http) {
+      return function (params, successCb = null, errorCb = null) {
+        return api($http).getList(
+          '/users',
+          params,
+          successCb,
+          errorCb
+        );
+      }
+    }
+  ])
+  .factory('UserOperations', [
+    'api',
+    '$http',
+    function (api, $http) {
+      return function (id, params, successCb = null, errorCb = null) {
+        return api($http).getList(
+          '/users/' + id + '/transactions',
+          params,
+          successCb,
+          errorCb
+        );
+      };
     }
   ]);

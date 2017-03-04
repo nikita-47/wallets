@@ -1,1 +1,4 @@
-angular.module('core.user', ['ngResource']);
+angular.module(
+  'core.user',
+  ['core-api']
+);

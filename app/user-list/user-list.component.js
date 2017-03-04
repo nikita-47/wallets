@@ -7,10 +7,14 @@ angular.
     controller: [
       'User',
       '$location',
-      function UserListController(User, $location) {
+      function (User, $location) {
         var self = this;
-        User.query(function (resp) {
-          self.users = resp.data;
+        var params = {
+          limit: 4,
+          offset: 0
+        };
+        User(params, function (resp) {
+          self.users = resp.data.data;
         });
         self.openUser = function (userId) {
           $location.path('/users/' + userId);

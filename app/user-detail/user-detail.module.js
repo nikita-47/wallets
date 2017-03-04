@@ -1,5 +1,5 @@
 'use strict';
 
 angular.module('userDetail', [
-  'ngRoute'
+  'ngRoute', 'core.user'
 ]);
