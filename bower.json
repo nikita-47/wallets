@@ -1,0 +1,19 @@
+{
+  "name": "wallets",
+  "description": "List of user wallets",
+  "main": "app.module.js",
+  "authors": [
+    "Nikita Bonachev"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular"
+  ],
+  "homepage": "https://github.com/NikitaBonachev/wallets",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.x",
+    "angular-mocks": "1.5.x",
+    "semantic": "semantic-ui#^2.2.9"
+  }
+}
