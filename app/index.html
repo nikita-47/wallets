@@ -6,14 +6,18 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="bower_components/semantic/dist/semantic.min.css"/>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
     <script src="user-list/user-list.module.js"></script>
     <script src="user-list/user-list.component.js"></script>
+    <script src="user-detail/user-detail.module.js"></script>
+    <script src="user-detail/user-detail.component.js"></script>
   </head>
   <body>
   <div class="main ui container">
     <h1 class="ui dividing centered header">User wallets</h1>
-    <user-list></user-list>
+    <div ng-view></div>
   </div>
   </body>
 </html>

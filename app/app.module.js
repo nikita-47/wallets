@@ -1,5 +1,7 @@
 'use strict';
 
 angular.module('walletsApp', [
-  'userList'
+  'ngRoute',
+  'userList',
+  'userDetail',
 ]);
