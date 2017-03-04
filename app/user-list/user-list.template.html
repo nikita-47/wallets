@@ -7,8 +7,9 @@
       <div class="left floated six wide column">
         <div class="header">{{ user.user_name }} {{ user.user_custom }}</div>
         <div class="meta">
-          <a href="mailto:{this.props.email}">{{ user.email }}</a>
-          <br/>
+          <a  ng-if="user.email"
+              href="mailto:{this.props.email}">{{ user.email }}</a>
+          <br ng-if="user.email"/>
           <span class="date">Register date: {{ user.register_date | date : "dd/MM/yyyy" }}</span>
         </div>
       </div>
