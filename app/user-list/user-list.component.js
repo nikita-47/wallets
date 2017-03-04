@@ -13,9 +13,15 @@ angular.
           limit: 4,
           offset: 0
         };
-        User(params, function (resp) {
-          self.users = resp.data.data;
-        });
+        self.isLoading = true;
+        User(
+          params,
+          function (resp) {
+            self.users = resp.data.data;
+            self.isLoading = false;
+          }, function () {
+            self.isLoading = false;
+          });
         self.openUser = function (userId) {
           $location.path('/users/' + userId);
         }

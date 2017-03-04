@@ -32,4 +32,7 @@
       <td>{{ transaction.status }}</td>
     </tr>
   </table>
+  <div
+      ng-if="$ctrl.isLoading"
+      class="ui active centered inline loader"></div>
 </div>

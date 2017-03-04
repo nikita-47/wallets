@@ -12,9 +12,18 @@ angular
           datetime_from: '2015-01-01T00:00:00 UTC',
           datetime_to: '2017-03-03T00:00:00 UTC'
         };
-        UserOperations(this.userId, params, function (response) {
-          self.transactions = response.data;
-        })
+        self.isLoading = true;
+        UserOperations(
+          this.userId,
+          params,
+          function (response) {
+            self.isLoading = false;
+            self.transactions = response.data;
+          },
+          function () {
+            self.isLoading = false;
+          }
+        )
       }
     ]
 });
