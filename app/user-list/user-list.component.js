@@ -5,14 +5,13 @@ angular.
   component('userList', {
     templateUrl: 'user-list/user-list.template.html',
     controller: [
-      '$http',
+      'User',
       '$location',
-      function UserListController($http, $location) {
+      function UserListController(User, $location) {
         var self = this;
-        $http.get('https://livedemo.xsolla.com/fe/test-task/baev/users?offset=0&limit=5').then(function (response) {
-            self.users = response.data.data;
+        User.query(function (resp) {
+          self.users = resp.data;
         });
-
         self.openUser = function (userId) {
           $location.path('/users/' + userId);
         }
