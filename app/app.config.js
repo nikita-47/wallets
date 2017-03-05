@@ -1,7 +1,8 @@
 const walletsApp = angular.module('walletsApp', [
   'ui.router',
   'userList',
-  'userDetail',
+  'userTransactions',
+  'userCreate',
   'templates'
 ]);
 
@@ -10,13 +11,15 @@ walletsApp
     function ($stateProvider,
               $locationProvider,
               $routeProvider) {
-
       $routeProvider.
         when('/users', {
           template: '<user-list></user-list>'
         }).
-        when('/users/:userId', {
-          template: '<user-detail></user-detail>'
+        when('/users/transactions/:userId', {
+          template: '<user-transactions></user-transactions>'
+        }).
+        when('/users/create', {
+          template: '<user-create></user-create>'
         }).
         otherwise('/users');
     }

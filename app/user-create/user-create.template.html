@@ -1,0 +1,54 @@
+<form
+    ng-submit="$ctrl.createUser($ctrl.user)"
+    class="ui form" novalidate>
+  <div class="field">
+    <label>User ID</label>
+    <input
+        ng-model="$ctrl.user.user_id"
+        type="text"
+        name="user-name"
+        placeholder="User ID">
+  </div>
+  <div class="field">
+    <label>User Name</label>
+    <input
+        ng-model="$ctrl.user.user_name"
+        type="text"
+        name="user-name"
+        placeholder="User Name">
+  </div>
+  <div class="field">
+    <label>Custom parameter for user identification</label>
+    <input
+        type="text"
+        name="parameter"
+        ng-model="$ctrl.user.user_custom"
+        placeholder="Custom parameter for user identification">
+  </div>
+  <div class="field">
+    <label>Email</label>
+    <input
+        ng-model="$ctrl.user.email"
+        type="text"
+        name="email"
+        placeholder="Email">
+  </div>
+  <button
+      ng-disabled="$ctrl.isLoading"
+      class="ui positive button"
+      type="submit">Create</button>
+  <button
+      ng-click="$ctrl.backToAll()"
+      class="ui button">Cancel</button>
+  <div
+      ng-if="$ctrl.isLoading"
+      class="ui active inline loader"></div>
+</form>
+<div
+    ng-repeat="error in $ctrl.errors"
+    class="ui negative message">
+  <div ng-if="error.header" class="header">
+    {{ error.header }}
+  </div>
+  <p>{{ error.message }}</p>
+</div>

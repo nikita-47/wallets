@@ -59,8 +59,8 @@ gulp.task('build-index', function () {
         }),
         ngAnnotate(),
         uglify(),
-        sourcemaps.write(),
-        rev()
+        rev(),
+        sourcemaps.write()
       ]
     }))
     .pipe(gulp.dest('./dist/'));
@@ -94,7 +94,7 @@ gulp.task('server', function() {
     .pipe(webserver({
       livereload: false,
       directoryListing: true,
-      open: "http://localhost:8000/index.html"
+      open: "http://localhost:8000/index.html#/users"
     }));
 });
 

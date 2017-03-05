@@ -1,13 +1,13 @@
-angular.module('userDetail', [
+angular.module('userTransactions', [
   'ngRoute', 'core.user'
 ]);
 
 angular
-  .module('userDetail')
-  .component('userDetail', {
-    templateUrl: 'user-detail/user-detail.template.html',
-    controller: ['UserOperations', '$routeParams',
-      function (UserOperations, $routeParams) {
+  .module('userTransactions')
+  .component('userTransactions', {
+    templateUrl: 'user-transactions/user-transactions.template.html',
+    controller: ['UserTransactions', '$routeParams', '$location',
+      function (UserTransactions, $routeParams, $location) {
         const $ctrl = this;
         $ctrl.userId = $routeParams.userId;
         const params =  {
@@ -15,7 +15,7 @@ angular
           datetime_to: '2017-03-03T00:00:00 UTC'
         };
         $ctrl.isLoading = true;
-        UserOperations(
+        UserTransactions(
           this.userId,
           params,
           function (response) {
@@ -25,7 +25,11 @@ angular
           function () {
             $ctrl.isLoading = false;
           }
-        )
+        );
+
+        $ctrl.backToAll = function () {
+          $location.path('/users');
+        }
       }
     ]
 });

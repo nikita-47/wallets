@@ -33,7 +33,11 @@ angular.
         };
 
         $ctrl.openUser = function (userId) {
-          $location.path('/users/' + userId);
+          $location.path('/users/transactions/' + userId);
+        };
+
+        $ctrl.createNewUser = function () {
+          $location.path('/users/create');
         };
 
         $ctrl.getPages = function() {
