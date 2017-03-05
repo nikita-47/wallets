@@ -4,26 +4,55 @@ angular.
   module('userList').
   component('userList', {
     templateUrl: 'user-list/user-list.template.html',
+    controllerAs: '$ctrl',
     controller: [
       'User',
       '$location',
       function (User, $location) {
-        const self = this;
-        const params = {
-          limit: 2,
+        const $ctrl = this;
+        $ctrl.perPageChoices = [5, 10, 15];
+
+        $ctrl.paginationsParams = {
+          limit: $ctrl.perPageChoices[0],
           offset: 0
         };
-        self.isLoading = true;
-        User(
-          params,
-          function (resp) {
-            self.users = resp.data.data;
-            self.isLoading = false;
-          }, function () {
-            self.isLoading = false;
-          });
-        self.openUser = function (userId) {
+
+        $ctrl.pages = 0;
+
+        loadUsers();
+
+        $ctrl.selectPerPage = function (limit) {
+          $ctrl.paginationsParams.offset = 0;
+          $ctrl.paginationsParams.limit = limit;
+          loadUsers();
+        };
+
+        $ctrl.setPage = function (page) {
+          $ctrl.paginationsParams.offset = page;
+          loadUsers();
+        };
+
+        $ctrl.openUser = function (userId) {
           $location.path('/users/' + userId);
+        };
+
+        $ctrl.getPages = function() {
+          return new Array($ctrl.pages);
+        };
+
+        function loadUsers() {
+          $ctrl.isLoading = true;
+          User(
+            $ctrl.paginationsParams,
+            function (resp) {
+              $ctrl.users = resp.data.data;
+              $ctrl.isLoading = false;
+              $ctrl.pages = Math.ceil(
+                resp.data['recordsTotal'] / $ctrl.paginationsParams.limit
+              );
+            }, function () {
+              $ctrl.isLoading = false;
+            });
         }
       }
     ]

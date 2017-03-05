@@ -95,9 +95,6 @@ gulp.task('server', function() {
       livereload: false,
       directoryListing: true,
       open: "http://localhost:8000/index.html"
-      // livereload: true,
-      // fallback: 'index.html',
-      // open: true
     }));
 });
 

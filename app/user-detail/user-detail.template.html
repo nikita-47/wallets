@@ -35,4 +35,11 @@
   <div
       ng-if="$ctrl.isLoading"
       class="ui active centered inline loader"></div>
+  <div
+      ng-if="$ctrl.transactions == 0"
+      class="ui warning message">
+    <div class="header">
+      No transactions for this user
+    </div>
+  </div>
 </div>

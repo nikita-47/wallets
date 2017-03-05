@@ -1,3 +1,16 @@
+<div class="ui compact menu">
+  <div class="ui simple dropdown item">
+    {{ $ctrl.paginationsParams.limit }} users per page
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div
+          class="item"
+          ng-if="choice != $ctrl.paginationsParams.limit"
+          ng-click="$ctrl.selectPerPage(choice)"
+          ng-repeat="choice in $ctrl.perPageChoices">{{ choice }}</div>
+    </div>
+  </div>
+</div>
 <div
     class="ui middle aligned selection divided list"
     ng-repeat="user in $ctrl.users"
@@ -31,3 +44,15 @@
 <div
     ng-if="$ctrl.isLoading"
     class="ui active centered inline loader"></div>
+<div
+    ng-if="$ctrl.pages > 0"
+    class="ui pagination menu"
+>
+  <a
+      class="item"
+      ng-click="$ctrl.setPage($index)"
+      ng-class="{active: $index == $ctrl.paginationsParams.offset }"
+      ng-repeat="page in $ctrl.getPages() track by $index">
+    {{ $index + 1 }}
+  </a>
+</div>
