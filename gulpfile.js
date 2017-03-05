@@ -12,6 +12,7 @@ const concat = require('gulp-concat');
 const rev = require('gulp-rev');
 const htmlmin = require('gulp-htmlmin');
 const templateCache = require('gulp-angular-templatecache');
+const ghPages = require('gulp-gh-pages');
 
 // cleans the build output
 gulp.task('clean', function (cb) {
@@ -100,6 +101,11 @@ gulp.task('server', function() {
     }));
 });
 
+// Deploy to gh-pages
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
+});
 
 // launch a build upon modification and publish it to a running server
 gulp.task('dev', ['build', 'watch', 'server']);
