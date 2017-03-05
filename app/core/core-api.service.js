@@ -6,7 +6,7 @@ angular
 angular
   .module('core-api').factory('api', [
   function () {
-    var baseUrl = 'https://livedemo.xsolla.com/fe/test-task/baev';
+    const baseUrl = 'https://livedemo.xsolla.com/fe/test-task/baev';
     return function api($http) {
       /**
        * Add callbacks
@@ -51,17 +51,17 @@ angular
        * @returns {Promise}
        */
       function getList(url, params = null, successCb = null, errorCb = null) {
-        var paramsString = '';
+        let paramsString = '';
         if (params) {
           paramsString = '?';
-          for (var key in params) {
+          for (const key in params) {
             if (params.hasOwnProperty(key)) {
               paramsString += key + '=' + params[key] + '&';
             }
           }
           paramsString = paramsString.slice(0, -1);
         }
-        var q = $http.get(baseUrl + url + paramsString);
+        const q = $http.get(baseUrl + url + paramsString);
         return addCallbacks(q, successCb, errorCb);
       }
 
@@ -78,7 +78,7 @@ angular
         if (!data) {
           data = {};
         }
-        var q = $http.put(baseUrl + url, data);
+        const q = $http.put(baseUrl + url, data);
         return addCallbacks(q, successCb, errorCb);
       }
 
@@ -92,7 +92,7 @@ angular
        * @returns {Promise}
        */
       function create(url, data, successCb, errorCb) {
-        var q = $http.post(baseUrl + url, data);
+        const q = $http.post(baseUrl + url, data);
         return addCallbacks(q, successCb, errorCb);
       }
 

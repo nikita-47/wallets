@@ -1,4 +1,4 @@
-var walletsApp = angular.module('walletsApp', [
+const walletsApp = angular.module('walletsApp', [
   'ui.router',
   'userList',
   'userDetail',
@@ -9,8 +9,7 @@ walletsApp
   .config(
     function ($stateProvider,
               $locationProvider,
-              $routeProvider
-              ) {
+              $routeProvider) {
 
       $routeProvider.
         when('/users', {

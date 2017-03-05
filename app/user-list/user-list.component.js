@@ -8,9 +8,9 @@ angular.
       'User',
       '$location',
       function (User, $location) {
-        var self = this;
-        var params = {
-          limit: 4,
+        const self = this;
+        const params = {
+          limit: 2,
           offset: 0
         };
         self.isLoading = true;
