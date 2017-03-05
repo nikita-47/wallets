@@ -50,7 +50,7 @@ angular
        * @param {function} errorCb
        * @returns {Promise}
        */
-      function getList(url, params = null, successCb = null, errorCb = null) {
+      function get(url, params = null, successCb = null, errorCb = null) {
         let paramsString = '';
         if (params) {
           paramsString = '?';
@@ -99,7 +99,7 @@ angular
       return {
         update: update,
         create: create,
-        getList: getList
+        get: get
       }
     }
   }

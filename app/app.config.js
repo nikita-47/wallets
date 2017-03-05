@@ -2,7 +2,7 @@ const walletsApp = angular.module('walletsApp', [
   'ui.router',
   'userList',
   'userTransactions',
-  'userCreate',
+  'userDetail',
   'templates'
 ]);
 
@@ -19,7 +19,10 @@ walletsApp
           template: '<user-transactions></user-transactions>'
         }).
         when('/users/create', {
-          template: '<user-create></user-create>'
+          template: '<user-detail></user-detail>'
+        }).
+        when('/users/edit/:userId', {
+          template: '<user-detail></user-detail>'
         }).
         otherwise('/users');
     }

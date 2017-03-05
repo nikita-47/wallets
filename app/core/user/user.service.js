@@ -5,13 +5,41 @@ angular.module(
 
 
 angular.module('core.user')
-  .factory('User', [
+  .factory('Users', [
     'api',
     '$http',
     function (api, $http) {
       return function (params, successCb = null, errorCb = null) {
-        return api($http).getList(
+        return api($http).get(
           '/users',
+          params,
+          successCb,
+          errorCb
+        );
+      }
+    }
+  ])
+  .factory('OneUser', [
+    'api',
+    '$http',
+    function (api, $http) {
+      return function (id, successCb = null, errorCb = null) {
+        return api($http).get(
+          '/users/' + id,
+          null,
+          successCb,
+          errorCb
+        );
+      }
+    }
+  ])
+  .factory('UpdateUser', [
+    'api',
+    '$http',
+    function (api, $http) {
+      return function (id, params, successCb = null, errorCb = null) {
+        return api($http).update(
+          '/users/' + id,
           params,
           successCb,
           errorCb
@@ -38,7 +66,7 @@ angular.module('core.user')
     '$http',
     function (api, $http) {
       return function (id, params, successCb = null, errorCb = null) {
-        return api($http).getList(
+        return api($http).get(
           '/users/' + id + '/transactions',
           params,
           successCb,

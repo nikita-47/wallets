@@ -1,9 +1,10 @@
 <form
-    ng-submit="$ctrl.createUser($ctrl.user)"
+    ng-submit="$ctrl.submitUser($ctrl.user)"
     class="ui form" novalidate>
   <div class="field">
     <label>User ID</label>
     <input
+        ng-disabled="$ctrl.userId"
         ng-model="$ctrl.user.user_id"
         type="text"
         name="user-name"
@@ -33,7 +34,31 @@
         name="email"
         placeholder="Email">
   </div>
+  <div class="filed">
+    <div class="ui checkbox">
+      <input
+          ng-if="$ctrl.userId"
+          type="checkbox"
+          name="enabled"
+          title="Enabled"
+          ng-model="$ctrl.user.enabled"
+      >
+      <label>Enabled</label>
+    </div>
+  </div>
   <button
+      ng-if="$ctrl.userId"
+      ng-disabled="$ctrl.isLoading"
+      class="ui positive button"
+      type="submit">Update</button>
+  <button
+      ng-if="$ctrl.userId"
+      ng-disabled="$ctrl.isLoading"
+      class="ui positive button"
+      ng-click="$ctrl.showTransactions()"
+      >Show transactions</button>
+  <button
+      ng-if="!$ctrl.userId"
       ng-disabled="$ctrl.isLoading"
       class="ui positive button"
       type="submit">Create</button>

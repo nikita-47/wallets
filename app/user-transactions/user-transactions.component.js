@@ -16,7 +16,7 @@ angular
         };
         $ctrl.isLoading = true;
         UserTransactions(
-          this.userId,
+          $ctrl.userId,
           params,
           function (response) {
             $ctrl.isLoading = false;
@@ -27,8 +27,8 @@ angular
           }
         );
 
-        $ctrl.backToAll = function () {
-          $location.path('/users');
+        $ctrl.backToProfile = function () {
+          $location.path('/users/edit/' + $ctrl.userId);
         }
       }
     ]

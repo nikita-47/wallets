@@ -6,9 +6,9 @@ angular.
     templateUrl: 'user-list/user-list.template.html',
     controllerAs: '$ctrl',
     controller: [
-      'User',
+      'Users',
       '$location',
-      function (User, $location) {
+      function (Users, $location) {
         const $ctrl = this;
         $ctrl.perPageChoices = [5, 10, 15];
 
@@ -33,7 +33,7 @@ angular.
         };
 
         $ctrl.openUser = function (userId) {
-          $location.path('/users/transactions/' + userId);
+          $location.path('/users/edit/' + userId);
         };
 
         $ctrl.createNewUser = function () {
@@ -46,7 +46,7 @@ angular.
 
         function loadUsers() {
           $ctrl.isLoading = true;
-          User(
+          Users(
             $ctrl.paginationsParams,
             function (resp) {
               $ctrl.users = resp.data.data;
