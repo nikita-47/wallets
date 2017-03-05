@@ -22,7 +22,7 @@ var cachebust = new CacheBuster();
 // cleans the build output
 gulp.task('clean', function (cb) {
   del([
-    './dist'
+    './dist/'
   ], cb);
 });
 

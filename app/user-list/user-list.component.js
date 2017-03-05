@@ -1,19 +1,13 @@
 angular.module('userList', ['core.user']);
-var $injector = angular.injector(['ng']);
-var $templateCache = $injector.get('$templateCache');
-
-console.log($templateCache.get('user-detail/user-detail.template.html'));
 
 angular.
   module('userList').
   component('userList', {
-    template: $templateCache.get('user-detail/user-detail.template.html'),
+    templateUrl: 'user-list/user-list.template.html',
     controller: [
       'User',
       '$location',
-      '$templateCache',
-      function (User, $location, $templateCache) {
-        console.log($templateCache.get('user-detail/user-detail.template.html'));
+      function (User, $location) {
         var self = this;
         var params = {
           limit: 4,
