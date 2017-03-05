@@ -1,9 +1,12 @@
-'use strict';
+angular.module('userDetail', [
+  'ngRoute', 'core.user'
+]);
+
 
 angular
   .module('userDetail')
   .component('userDetail', {
-    templateUrl: 'user-detail/user-detail.template.html',
+    templateUrl: 'user-detail.template.html',
     controller: ['UserOperations', '$routeParams',
       function (UserOperations, $routeParams) {
         var self = this;

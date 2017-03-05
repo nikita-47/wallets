@@ -1,4 +1,9 @@
 angular
+  .module(
+    'core-api', []
+  );
+
+angular
   .module('core-api').factory('api', [
   function () {
     var baseUrl = 'https://livedemo.xsolla.com/fe/test-task/baev';

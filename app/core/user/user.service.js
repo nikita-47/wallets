@@ -1,3 +1,9 @@
+angular.module(
+  'core.user',
+  ['core-api']
+);
+
+
 angular.module('core.user')
   .factory('User', [
     'api',
