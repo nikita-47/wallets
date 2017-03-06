@@ -52,12 +52,6 @@
       class="ui positive button"
       type="submit">Update</button>
   <button
-      ng-if="$ctrlEdit.userId"
-      ng-disabled="$ctrlEdit.isLoading"
-      class="ui positive button"
-      ng-click="$ctrlEdit.showTransactions()"
-  >Show transactions</button>
-  <button
       ng-if="!$ctrlEdit.userId"
       ng-disabled="$ctrlEdit.isLoading"
       class="ui positive button"

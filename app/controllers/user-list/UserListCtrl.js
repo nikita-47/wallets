@@ -31,10 +31,6 @@ userListCtrl.controller('UserListCtrl', [
       $state.go('user-detail', { id: userId });
     };
 
-    $ctrlUserList.createNewUser = function () {
-      $location.path('/users/create');
-    };
-
     $ctrlUserList.getPages = function () {
       return new Array($ctrlUserList.pages);
     };

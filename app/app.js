@@ -22,12 +22,15 @@ walletsApp
       $stateProvider.state('user-detail', {
         url: '/user?id',
         templateUrl: 'controllers/user-detail/UserDetailTemplate.html',
-        controllerAs: '$ctrlDetailList',
-        controller: 'userDetailCtrl'
+        controllerAs: '$ctrlDetail',
+        controller: 'UserDetailCtrl'
       });
 
       $stateProvider.state('user-transactions',{
-        url: '/users/transactions/?userId'
+        url: '/user/transactions?id',
+        templateUrl: 'controllers/user-transactions/UserTransactionsTemplate.html',
+        controllerAs: '$ctrlUserTransactions',
+        controller: 'UserTransactionsCtrl'
       });
 
       $urlRouterProvider.otherwise(function ($injector) {

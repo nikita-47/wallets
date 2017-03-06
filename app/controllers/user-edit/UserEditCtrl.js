@@ -30,21 +30,13 @@ angular
       'OneUser',
       '$stateParams',
       '$location',
-      '$scope',
       function (
         CreateUser,
         UpdateUser,
         OneUser,
         $stateParams,
-        $location,
-        $scope) {
+        $location) {
         const $ctrlEdit = this;
-
-        $scope.init = function(name, id)
-        {
-          console.log(name);
-          console.log(id);
-        };
 
         $ctrlEdit.user = {
           user_id: '',
@@ -52,8 +44,6 @@ angular
           user_custom: '',
           email: ''
         };
-
-        console.log($stateParams.id);
 
         if ($stateParams.id) {
           $ctrlEdit.userId = $stateParams.id;

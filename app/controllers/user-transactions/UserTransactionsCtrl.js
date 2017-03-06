@@ -1,35 +1,12 @@
-angular.module('userTransactions', [
-  'ngRoute', 'core.user'
+const userTransactionsCtrl = angular.module('userTransactions', [
+  'ui.router',
+  'transactionList'
 ]);
 
-angular
-  .module('userTransactions')
-  .component('userTransactions', {
-    templateUrl: 'controllers/user-transactions/UserTransactionsTemplate.html',
-    controller: ['UserTransactions', '$routeParams', '$location',
-      function (UserTransactions, $routeParams, $location) {
-        const $ctrl = this;
-        $ctrl.userId = $routeParams.userId;
-        const params =  {
-          datetime_from: '2015-01-01T00:00:00 UTC',
-          datetime_to: '2017-03-03T00:00:00 UTC'
-        };
-        $ctrl.isLoading = true;
-        UserTransactions(
-          $ctrl.userId,
-          params,
-          function (response) {
-            $ctrl.isLoading = false;
-            $ctrl.transactions = response.data;
-          },
-          function () {
-            $ctrl.isLoading = false;
-          }
-        );
-
-        $ctrl.backToProfile = function () {
-          $location.path('/users/edit/' + $ctrl.userId);
-        };
-      }
-    ]
-});
+userTransactionsCtrl.controller('UserTransactionsCtrl', [
+  '$stateParams',
+  function ($stateParams) {
+    const $ctrlUserTransactions = this;
+    $ctrlUserTransactions.id = $stateParams.id;
+  }
+]);

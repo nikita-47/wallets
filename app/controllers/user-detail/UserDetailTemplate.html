@@ -1,4 +1,10 @@
 <button
+    class="ui button"
     ui-sref="user-list"
-    class="ui button">Back to all users</button>
+>Back to all users</button>
+<button
+    class="ui positive button"
+    ng-if="$ctrlDetail.id"
+    ui-sref="user-transactions({ id: $ctrlDetail.id })"
+>Show transactions</button>
 <user-edit></user-edit>

@@ -1,9 +1,14 @@
-const userDetailCtrl = angular.module('userDetail', ['core.user', 'userEdit']);
+const userDetailCtrl = angular.module('userDetail', [
+  'ui.router',
+  'userEdit'
+]);
 
-userDetailCtrl.controller('userDetailCtrl', [
-  'Users',
-  '$location',
-  function (Users, $location) {
-
+userDetailCtrl.controller('UserDetailCtrl', [
+  '$stateParams',
+  function ($stateParams) {
+    const $ctrlDetail = this;
+    if ($stateParams.id) {
+      $ctrlDetail.id = $stateParams.id;
+    }
   }
 ]);
