@@ -1,27 +1,27 @@
 <div class="ui compact menu">
   <div class="ui simple dropdown item">
-    {{ $ctrl.paginationsParams.limit }} users per page
+    {{ $ctrlUserList.paginationsParams.limit }} users per page
     <i class="dropdown icon"></i>
     <div class="menu">
       <div
           class="item"
-          ng-if="choice != $ctrl.paginationsParams.limit"
-          ng-click="$ctrl.selectPerPage(choice)"
-          ng-repeat="choice in $ctrl.perPageChoices">{{ choice }}</div>
+          ng-if="choice != $ctrlUserList.paginationsParams.limit"
+          ng-click="$ctrlUserList.selectPerPage(choice)"
+          ng-repeat="choice in $ctrlUserList.perPageChoices">{{ choice }}</div>
     </div>
   </div>
 </div>
 <button
     class="ui button"
-    ng-click="$ctrl.createNewUser()"
+    ng-click="$ctrlUserList.createNewUser()"
 >Create new user</button>
 <div
     class="ui middle aligned selection divided list"
-    ng-repeat="user in $ctrl.users"
+    ng-repeat="user in $ctrlUserList.users"
 >
   <div
       class="item"
-      ng-click="$ctrl.openUser(user.user_id)"
+      ng-click="$ctrlUserList.openUser(user.user_id)"
   >
     <div class="content ui three column grid">
       <div class="left floated six wide column">
@@ -46,17 +46,17 @@
   </div>
 </div>
 <div
-    ng-if="$ctrl.isLoading"
+    ng-if="$ctrlUserList.isLoading"
     class="ui active centered inline loader"></div>
 <div
-    ng-if="$ctrl.pages > 0"
+    ng-if="$ctrlUserList.pages > 0"
     class="ui pagination menu"
 >
   <a
       class="item"
-      ng-click="$ctrl.setPage($index)"
-      ng-class="{active: $index == $ctrl.paginationsParams.offset }"
-      ng-repeat="page in $ctrl.getPages() track by $index">
+      ng-click="$ctrlUserList.setPage($index)"
+      ng-class="{active: $index == $ctrlUserList.paginationsParams.offset }"
+      ng-repeat="page in $ctrlUserList.getPages() track by $index">
     {{ $index + 1 }}
   </a>
 </div>

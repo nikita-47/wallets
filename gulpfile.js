@@ -85,6 +85,8 @@ gulp.task('build', [
 gulp.task('watch', function() {
   return gulp.watch([
     './app/index.html',
+    './app/**/**/*.html',
+    './app/**/**/*.js',
     './app/**/*.html',
     './app/**/*.js',
     './app/*.js'],

@@ -1,63 +1,57 @@
-angular.module('userList', ['core.user']);
+const userListCtrl = angular.module('userList', ['core.user']);
 
-angular.
-  module('userList').
-  component('userList', {
-    templateUrl: 'controllers/user-list/UserListTemplate.html',
-    controllerAs: '$ctrl',
-    controller: [
-      'Users',
-      '$location',
-      function (Users, $location) {
-        const $ctrl = this;
-        $ctrl.perPageChoices = [5, 10, 15];
+userListCtrl.controller('UserListCtrl', [
+  'Users',
+  '$location',
+  '$injector',
+  function (Users, $location, $injector) {
+    const $ctrlUserList = this;
+    $ctrlUserList.perPageChoices = [5, 10, 15];
+    $ctrlUserList.pages = 0;
+    $ctrlUserList.paginationsParams = {
+      limit: $ctrlUserList.perPageChoices[0],
+      offset: 0
+    };
 
-        $ctrl.paginationsParams = {
-          limit: $ctrl.perPageChoices[0],
-          offset: 0
-        };
+    loadUsers();
 
-        $ctrl.pages = 0;
+    $ctrlUserList.selectPerPage = function (limit) {
+      $ctrlUserList.paginationsParams.offset = 0;
+      $ctrlUserList.paginationsParams.limit = limit;
+      loadUsers();
+    };
 
-        loadUsers();
+    $ctrlUserList.setPage = function (page) {
+      $ctrlUserList.paginationsParams.offset = page;
+      loadUsers();
+    };
 
-        $ctrl.selectPerPage = function (limit) {
-          $ctrl.paginationsParams.offset = 0;
-          $ctrl.paginationsParams.limit = limit;
-          loadUsers();
-        };
+    $ctrlUserList.openUser = function (userId) {
+      const $state = $injector.get('$state');
+      $state.go('user-detail', { id: userId });
+    };
 
-        $ctrl.setPage = function (page) {
-          $ctrl.paginationsParams.offset = page;
-          loadUsers();
-        };
+    $ctrlUserList.createNewUser = function () {
+      $location.path('/users/create');
+    };
 
-        $ctrl.openUser = function (userId) {
-          $location.path('/users/edit/' + userId);
-        };
+    $ctrlUserList.getPages = function () {
+      return new Array($ctrlUserList.pages);
+    };
 
-        $ctrl.createNewUser = function () {
-          $location.path('/users/create');
-        };
-
-        $ctrl.getPages = function() {
-          return new Array($ctrl.pages);
-        };
-
-        function loadUsers() {
-          $ctrl.isLoading = true;
-          Users(
-            $ctrl.paginationsParams,
-            function (resp) {
-              $ctrl.users = resp.data.data;
-              $ctrl.isLoading = false;
-              $ctrl.pages = Math.ceil(
-                resp.data.recordsTotal / $ctrl.paginationsParams.limit
-              );
-            }, function () {
-              $ctrl.isLoading = false;
-            });
-        }
-      }
-    ]
-  });
+    function loadUsers() {
+      $ctrlUserList.isLoading = true;
+      Users(
+        $ctrlUserList.paginationsParams,
+        function (resp) {
+          $ctrlUserList.users = resp.data.data;
+          $ctrlUserList.isLoading = false;
+          $ctrlUserList.pages = Math.ceil(
+            resp.data.recordsTotal / $ctrlUserList.paginationsParams.limit
+          );
+        }, function () {
+          $ctrlUserList.isLoading = false;
+        });
+    }
+  }
+]);

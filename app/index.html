@@ -18,18 +18,20 @@
     <!-- build:app js/app.js -->
     <script src="app.js"></script>
     <script src="controllers/user-list/UserListCtrl.js"></script>
+    <script src="controllers/user-edit/UserEditCtrl.js"></script>
     <script src="controllers/user-detail/UserDetailCtrl.js"></script>
-    <script src="controllers/user-transactions/UsertTransactionsCtrl.js"></script>
+    <script src="controllers/user-transactions/UserTransactionsCtrl.js"></script>
     <script src="services/user/user-services.js"></script>
     <script src="services/core-api.js"></script>
     <!-- endbuild -->
 
     <script src="js/templates.js"></script>
   </head>
-  <body>
-  <div class="main ui container">
-    <h1 class="ui dividing centered header">User wallets</h1>
-    <div ng-view></div>
-  </div>
+  <!-- in index.html -->
+  <body ng-app="walletsApp">
+    <div class="main ui container">
+      <h1 class="ui dividing centered header">User wallets</h1>
+      <div ui-view></div>
+    </div>
   </body>
 </html>

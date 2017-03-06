@@ -1,0 +1,76 @@
+<form
+    ng-submit="$ctrlEdit.submitUser($ctrlEdit.user)"
+    class="ui form" novalidate>
+  <div class="field">
+    <label>User ID</label>
+    <input
+        ng-disabled="$ctrlEdit.userId"
+        ng-model="$ctrlEdit.user.user_id"
+        type="text"
+        name="user-name"
+        placeholder="User ID">
+  </div>
+  <div class="field">
+    <label>User Name</label>
+    <input
+        ng-model="$ctrlEdit.user.user_name"
+        type="text"
+        name="user-name"
+        placeholder="User Name">
+  </div>
+  <div class="field">
+    <label>Custom parameter for user identification</label>
+    <input
+        type="text"
+        name="parameter"
+        ng-model="$ctrlEdit.user.user_custom"
+        placeholder="Custom parameter for user identification">
+  </div>
+  <div class="field">
+    <label>Email</label>
+    <input
+        ng-model="$ctrlEdit.user.email"
+        type="text"
+        name="email"
+        placeholder="Email">
+  </div>
+  <div class="filed">
+    <div class="ui checkbox">
+      <input
+          ng-if="$ctrlEdit.userId"
+          type="checkbox"
+          name="enabled"
+          title="Enabled"
+          ng-model="$ctrlEdit.user.enabled"
+      >
+      <label>Enabled</label>
+    </div>
+  </div>
+  <button
+      ng-if="$ctrlEdit.userId"
+      ng-disabled="$ctrlEdit.isLoading"
+      class="ui positive button"
+      type="submit">Update</button>
+  <button
+      ng-if="$ctrlEdit.userId"
+      ng-disabled="$ctrlEdit.isLoading"
+      class="ui positive button"
+      ng-click="$ctrlEdit.showTransactions()"
+  >Show transactions</button>
+  <button
+      ng-if="!$ctrlEdit.userId"
+      ng-disabled="$ctrlEdit.isLoading"
+      class="ui positive button"
+      type="submit">Create</button>
+  <div
+      ng-if="$ctrlEdit.isLoading"
+      class="ui active inline loader"></div>
+</form>
+<div
+    ng-repeat="error in $ctrlEdit.errors"
+    class="ui negative message">
+  <div ng-if="error.header" class="header">
+    {{ error.header }}
+  </div>
+  <p>{{ error.message }}</p>
+</div>
