@@ -6,6 +6,7 @@ const gulp = require('gulp'),
   buffer = require('vinyl-buffer'),
   uglify = require('gulp-uglify'),
   jshint = require('gulp-jshint');
+const karma = require('gulp-karma');
 const stylish = require('jshint-stylish');
 const usemin = require('gulp-usemin');
 const babel = require('gulp-babel');
@@ -107,6 +108,23 @@ gulp.task('deploy', function() {
     .pipe(ghPages());
 });
 
+
+// runs karma tests
+gulp.task('test', function() {
+    var testFiles = [
+        './app/controllers/**/*.js'
+    ];
+
+    return gulp.src(testFiles)
+        .pipe(karma({
+            configFile: 'karma.conf.js',
+            action: 'run'
+        }))
+        .on('error', function(err) {
+            console.log('karma tests failed: ' + err);
+            throw err;
+        });
+});
 
 // runs jshint
 gulp.task('jshint', function() {
