@@ -61,6 +61,20 @@ angular.module('core.user')
       };
     }
   ])
+  .factory('NewRecharge', [
+    'api',
+    '$http',
+    function (api, $http) {
+      return function (id, params, successCb = null, errorCb = null) {
+        return api($http).create(
+          '/users/' + id + '/recharge',
+          params,
+          successCb,
+          errorCb
+        );
+      };
+    }
+  ])
   .factory('UserTransactions', [
     'api',
     '$http',

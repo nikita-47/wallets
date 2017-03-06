@@ -1,0 +1,36 @@
+<form
+    ng-submit="$ctrlNewRecharge.submitRecharge($ctrlNewRecharge.newRecharge)"
+    class="ui form" novalidate>
+  <div class="field">
+    <label>Amount</label>
+    <input
+        ng-model="$ctrlNewRecharge.newRecharge.amount"
+        type="text"
+        name="user-name"
+        placeholder="Amount">
+  </div>
+  <div class="field">
+    <label>Comment</label>
+    <input
+        ng-model="$ctrlNewRecharge.newRecharge.comment"
+        type="text"
+        name="user-name"
+        placeholder="Comment">
+  </div>
+  <button
+      class="ui positive button"
+      type="submit"
+      ng-disabled="$ctrlNewRecharge.isLoading"
+  >Create transaction</button>
+  <div
+      ng-if="$ctrlNewRecharge.isLoading"
+      class="ui active inline loader"></div>
+</form>
+<div
+    ng-repeat="error in $ctrlNewRecharge.errors"
+    class="ui negative message">
+  <div ng-if="error.header" class="header">
+    {{ error.header }}
+  </div>
+  <p>{{ error.message }}</p>
+</div>

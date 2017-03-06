@@ -1,6 +1,7 @@
 const userDetailCtrl = angular.module('userDetail', [
   'ui.router',
-  'userEdit'
+  'userEdit',
+  'newRecharge'
 ]);
 
 userDetailCtrl.controller('UserDetailCtrl', [
