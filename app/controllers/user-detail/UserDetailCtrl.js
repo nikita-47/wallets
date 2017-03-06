@@ -21,7 +21,7 @@ const emailRegexp = new RegExp(
 angular
   .module('userDetail')
   .component('userDetail', {
-    templateUrl: 'user-detail/user-detail.template.html',
+    templateUrl: 'controllers/user-detail/UserDetailTemplate.html',
     controller: ['CreateUser', 'UpdateUser', 'OneUser', '$routeParams', '$location',
       function (CreateUser, UpdateUser, OneUser, $routeParams, $location) {
         const $ctrl = this;

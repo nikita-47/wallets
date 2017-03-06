@@ -3,7 +3,7 @@ angular.module('userList', ['core.user']);
 angular.
   module('userList').
   component('userList', {
-    templateUrl: 'user-list/user-list.template.html',
+    templateUrl: 'controllers/user-list/UserListTemplate.html',
     controllerAs: '$ctrl',
     controller: [
       'Users',

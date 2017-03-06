@@ -5,7 +5,7 @@ angular.module('userTransactions', [
 angular
   .module('userTransactions')
   .component('userTransactions', {
-    templateUrl: 'user-transactions/user-transactions.template.html',
+    templateUrl: 'controllers/user-transactions//UserTransactionsCtrl.html',
     controller: ['UserTransactions', '$routeParams', '$location',
       function (UserTransactions, $routeParams, $location) {
         const $ctrl = this;
