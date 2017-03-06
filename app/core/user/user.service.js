@@ -16,7 +16,7 @@ angular.module('core.user')
           successCb,
           errorCb
         );
-      }
+      };
     }
   ])
   .factory('OneUser', [
@@ -30,7 +30,7 @@ angular.module('core.user')
           successCb,
           errorCb
         );
-      }
+      };
     }
   ])
   .factory('UpdateUser', [
@@ -44,7 +44,7 @@ angular.module('core.user')
           successCb,
           errorCb
         );
-      }
+      };
     }
   ])
   .factory('CreateUser', [
@@ -58,7 +58,7 @@ angular.module('core.user')
           successCb,
           errorCb
         );
-      }
+      };
     }
   ])
   .factory('UserTransactions', [

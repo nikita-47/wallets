@@ -52,7 +52,7 @@ angular.
               $ctrl.users = resp.data.data;
               $ctrl.isLoading = false;
               $ctrl.pages = Math.ceil(
-                resp.data['recordsTotal'] / $ctrl.paginationsParams.limit
+                resp.data.recordsTotal / $ctrl.paginationsParams.limit
               );
             }, function () {
               $ctrl.isLoading = false;

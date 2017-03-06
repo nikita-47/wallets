@@ -4,7 +4,8 @@ const gulp = require('gulp'),
   sourcemaps = require('gulp-sourcemaps'),
   source = require('vinyl-source-stream'),
   buffer = require('vinyl-buffer'),
-  uglify = require('gulp-uglify');
+  uglify = require('gulp-uglify'),
+  jshint = require('gulp-jshint');
 const usemin = require('gulp-usemin');
 const babel = require('gulp-babel');
 const ngAnnotate = require('gulp-ng-annotate');
@@ -71,6 +72,7 @@ gulp.task('build-index', function () {
 gulp.task('build', [
   'clean',
   'bower',
+  'jshint',
   'build-template',
   'build-index'],
   function() {
@@ -102,6 +104,14 @@ gulp.task('server', function() {
 gulp.task('deploy', function() {
   return gulp.src('./dist/**/*')
     .pipe(ghPages());
+});
+
+
+// runs jshint
+gulp.task('jshint', function() {
+  gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
+    .pipe(jshint({esversion: 6}))
+    .pipe(jshint.reporter('default'));
 });
 
 // launch a build upon modification and publish it to a running server

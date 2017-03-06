@@ -29,7 +29,7 @@ angular
 
         $ctrl.backToProfile = function () {
           $location.path('/users/edit/' + $ctrl.userId);
-        }
+        };
       }
     ]
 });

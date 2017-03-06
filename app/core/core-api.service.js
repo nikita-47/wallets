@@ -100,7 +100,7 @@ angular
         update: update,
         create: create,
         get: get
-      }
-    }
+      };
+    };
   }
 ]);
