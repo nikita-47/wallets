@@ -6,6 +6,7 @@ const gulp = require('gulp'),
   buffer = require('vinyl-buffer'),
   uglify = require('gulp-uglify'),
   jshint = require('gulp-jshint');
+const stylish = require('jshint-stylish');
 const usemin = require('gulp-usemin');
 const babel = require('gulp-babel');
 const ngAnnotate = require('gulp-ng-annotate');
@@ -110,8 +111,8 @@ gulp.task('deploy', function() {
 // runs jshint
 gulp.task('jshint', function() {
   gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
-    .pipe(jshint({esversion: 6}))
-    .pipe(jshint.reporter('default'));
+    .pipe(jshint({ esversion: 6 }))
+    .pipe(jshint.reporter('jshint-stylish'));
 });
 
 // launch a build upon modification and publish it to a running server
