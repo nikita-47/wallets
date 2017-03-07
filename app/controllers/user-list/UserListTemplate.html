@@ -1,41 +1,47 @@
-<div class="ui compact menu">
-  <div class="ui simple dropdown item">
-    {{ $ctrlUserList.paginationsParams.limit }} users per page
-    <i class="dropdown icon"></i>
-    <div class="menu">
-      <div
-          class="item"
-          ng-if="choice != $ctrlUserList.paginationsParams.limit"
-          ng-click="$ctrlUserList.selectPerPage(choice)"
-          ng-repeat="choice in $ctrlUserList.perPageChoices">{{ choice }}</div>
+<div class="ui main text container">
+  <div class="ui grid">
+    <div class="left aligned eight wide column">
+      <button
+          class="ui button"
+          ui-sref="user-detail"
+      >Create new user
+      </button>
+    </div>
+    <div class="right aligned eight wide column">
+      <div class="ui compact menu">
+        <div class="ui simple dropdown item">
+          {{ $ctrlUserList.paginationsParams.limit }} users per page
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div
+                class="item"
+                ng-if="choice != $ctrlUserList.paginationsParams.limit"
+                ng-click="$ctrlUserList.selectPerPage(choice)"
+                ng-repeat="choice in $ctrlUserList.perPageChoices">{{ choice }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<button
-    class="ui button"
-    ui-sref="user-detail"
->Create new user</button>
-<div
-    class="ui middle aligned selection divided list"
-    ng-repeat="user in $ctrlUserList.users"
->
-  <div
-      class="item"
-      ng-click="$ctrlUserList.openUser(user.user_id)"
-  >
-    <div class="content ui three column grid">
+  <div class="ui selection divided list segment">
+    <div
+        class="item"
+        ng-repeat="user in $ctrlUserList.users"
+        ng-click="$ctrlUserList.openUser(user.user_id)"
+    >
       <div class="left floated six wide column">
-        <div class="header">{{ user.user_name }} {{ user.user_custom }}</div>
+        <div class="header">{{ user.user_name }} {{ user.user_custom ? '(' + user.user_custom + ')' : '' }}</div>
         <div class="meta">
-          <a  ng-if="user.email"
-              href="mailto:{this.props.email}">{{ user.email }}</a>
+          <a ng-if="user.email"
+             href="mailto:{this.props.email}">{{ user.email }}</a>
           <br ng-if="user.email"/>
           <span class="date">Register date: {{ user.register_date | date : "dd/MM/yyyy" }}</span>
         </div>
       </div>
-      <div class="rigth floated six wide column">
+      <div class="right floated">
         <div class="meta">
-          <span>Currency: {{ user.wallet_currency }}</span>
+          <span>Currency: {{ user.wallet_currency ? user.wallet_currency : 'not set' }}</span>
           <br/>
           <span>Balance: {{ user.balance }}</span>
           <br/>
@@ -43,20 +49,22 @@
         </div>
       </div>
     </div>
+    <div class="ui active inverted dimmer"
+         ng-if="$ctrlUserList.isLoading"
+    >
+      <div class="ui loader"></div>
+    </div>
   </div>
-</div>
-<div
-    ng-if="$ctrlUserList.isLoading"
-    class="ui active centered inline loader"></div>
-<div
-    ng-if="$ctrlUserList.pages > 0"
-    class="ui pagination menu"
->
-  <a
-      class="item"
-      ng-click="$ctrlUserList.setPage($index)"
-      ng-class="{active: $index == $ctrlUserList.paginationsParams.offset }"
-      ng-repeat="page in $ctrlUserList.getPages() track by $index">
-    {{ $index + 1 }}
-  </a>
+  <div
+      class="ui pagination menu"
+      ng-if="$ctrlUserList.pages > 0"
+  >
+    <a
+        class="item"
+        ng-click="$ctrlUserList.setPage($index)"
+        ng-class="{active: $index == $ctrlUserList.paginationsParams.offset }"
+        ng-repeat="page in $ctrlUserList.getPages() track by $index">
+      {{ $index + 1 }}
+    </a>
+  </div>
 </div>
