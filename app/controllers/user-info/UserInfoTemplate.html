@@ -1,0 +1,34 @@
+<div class="ui horizontal tiny statistics">
+  <div class="statistic">
+    <div class="value">
+      {{ $ctrlInfo.user.register_date | date : "dd/MM/yyyy" }}
+    </div>
+    <div class="label">
+      Register date
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      {{ $ctrlInfo.user.wallet_currency }}
+    </div>
+    <div class="label">
+      Currency
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      {{ $ctrlInfo.user.balance }}
+    </div>
+    <div class="label">
+      Balance
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      {{ $ctrlInfo.user.wallet_amount }}
+    </div>
+    <div class="label">
+      Wallet Amount
+    </div>
+  </div>
+</div>

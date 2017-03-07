@@ -60,10 +60,6 @@ angular
           );
         }
 
-        $ctrlEdit.showTransactions = function () {
-          $location.path('/users/transactions/' + $ctrlEdit.userId);
-        };
-
         $ctrlEdit.submitUser = function (user) {
           $ctrlEdit.errors = [];
           if (user.email.length > 0) {
