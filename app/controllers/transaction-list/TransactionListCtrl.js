@@ -14,6 +14,7 @@ angular
       function (
         UserTransactions,
         $stateParams) {
+
         const $ctrlTransactionList = this;
         $ctrlTransactionList.userId = $stateParams.id;
         const params =  {
@@ -32,6 +33,16 @@ angular
             $ctrlTransactionList.isLoading = false;
           }
         );
+
+        $('#rangestart').calendar({
+          type: 'date',
+          endCalendar: $('#rangeend')
+        });
+        $('#rangeend').calendar({
+          type: 'date',
+          startCalendar: $('#rangestart')
+        });
+
       }
     ]
 });
