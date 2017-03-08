@@ -12,8 +12,18 @@
         <user-edit></user-edit>
       </div>
       <div class="eight wide column">
-        <user-info ng-if="$ctrlDetail.id"></user-info>
-        <new-recharge ng-if="$ctrlDetail.id"></new-recharge>
+        <div class="ui grid">
+          <div class="row">
+            <div class="sixteen wide column">
+              <user-info ng-if="$ctrlDetail.id"></user-info>
+            </div>
+          </div>
+          <div class="row">
+            <div class="sixteen wide column">
+              <new-recharge ng-if="$ctrlDetail.id"></new-recharge>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

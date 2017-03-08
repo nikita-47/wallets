@@ -16,6 +16,7 @@ const rev = require('gulp-rev');
 const htmlmin = require('gulp-htmlmin');
 const templateCache = require('gulp-angular-templatecache');
 const ghPages = require('gulp-gh-pages');
+const cssmin = require('gulp-cssmin');
 
 // cleans the build output
 gulp.task('clean', function (cb) {
@@ -52,8 +53,8 @@ gulp.task('build-template', function() {
 gulp.task('build-index', function () {
   return gulp.src('./app/index.html')
     .pipe(usemin({
-      css: [rev()],
-      html: [htmlmin({collapseWhitespace: true})],
+      css: [cssmin(), rev()],
+      html: [htmlmin({ collapseWhitespace: true })],
       js: [uglify(), rev()],
       app: [
         sourcemaps.init(),
@@ -86,6 +87,7 @@ gulp.task('watch', function() {
   return gulp.watch([
     './app/index.html',
     './app/**/**/*.html',
+    './app/**/*.css',
     './app/**/**/*.js',
     './app/**/*.html',
     './app/**/*.js',

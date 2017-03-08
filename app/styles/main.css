@@ -1,0 +1,14 @@
+.ui.dividing.centered.header
+{
+    margin: 1em 0 1em 0;
+}
+
+.main.ui
+{
+    margin-bottom: 1em;
+}
+
+.user-list
+{
+    min-height: 3em;
+}

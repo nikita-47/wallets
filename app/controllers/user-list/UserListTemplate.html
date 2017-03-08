@@ -10,12 +10,12 @@
     <div class="right aligned eight wide column">
       <div class="ui compact menu">
         <div class="ui simple dropdown item">
-          {{ $ctrlUserList.paginationsParams.limit }} users per page
+          {{ $ctrlUserList.pageParams.limit }} users per page
           <i class="dropdown icon"></i>
           <div class="menu">
             <div
                 class="item"
-                ng-if="choice != $ctrlUserList.paginationsParams.limit"
+                ng-if="choice != $ctrlUserList.pageParams.limit"
                 ng-click="$ctrlUserList.selectPerPage(choice)"
                 ng-repeat="choice in $ctrlUserList.perPageChoices">{{ choice }}
             </div>
@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="ui selection divided list segment">
+  <div class="ui selection divided list segment user-list">
     <div
         class="item"
         ng-repeat="user in $ctrlUserList.users"
@@ -57,14 +57,18 @@
   </div>
   <div
       class="ui pagination menu"
-      ng-if="$ctrlUserList.pages > 0"
+      ng-if="$ctrlUserList.pages.length > 1"
   >
     <a
         class="item"
-        ng-click="$ctrlUserList.setPage($index)"
-        ng-class="{active: $index == $ctrlUserList.paginationsParams.offset }"
-        ng-repeat="page in $ctrlUserList.getPages() track by $index">
-      {{ $index + 1 }}
+        ng-class="{
+          active: page == $ctrlUserList.currentPage,
+          disabled: page == '...'
+        }"
+        ng-click="$ctrlUserList.setPage(page - 1)"
+        ng-repeat="page in $ctrlUserList.pages track by $index">
+      {{ page }}
+      {{ page.isInteger() }}
     </a>
   </div>
 </div>

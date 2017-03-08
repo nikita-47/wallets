@@ -1,4 +1,12 @@
 <div class="ui segment">
+  <h3
+      class="ui header"
+      ng-if="!$ctrlEdit.userId"
+  >Create new user</h3>
+  <h3
+      class="ui header"
+      ng-if="$ctrlEdit.userId"
+  >Update user</h3>
   <form
       class="ui form"
       ng-submit="$ctrlEdit.submitUser($ctrlEdit.user)"
