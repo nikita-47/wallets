@@ -69,8 +69,8 @@ gulp.task('favicon', function () {
 
 // copy semantic-ui assets
 gulp.task('build-assets', function () {
-  return gulp.src('./app/bower_components/semantic/dist/themes/default/assets/**/*.*')
-    .pipe(gulp.dest('./dist/css/themes/default/assets/'));
+  return gulp.src(['./app/bower_components/semantic/dist/themes/default/assets/**/*'])
+    .pipe(gulp.dest('./dist/css/themes/default/assets'));
 });
 
 
@@ -82,13 +82,13 @@ gulp.task('jshint', function () {
     './app/*.js',
     '!./app/bower_components/**'
   ])
-    .pipe(jshint({esversion: 6}))
+    .pipe(jshint({ esversion: 6 }))
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
 
 // build application
-gulp.task('js', function () {
+gulp.task('build-js', function () {
   gulp.src([
     './app/**/**/*.js',
     './app/**/*.js',
@@ -110,7 +110,7 @@ gulp.task('js', function () {
 // full build
 gulp.task('build', [
     'clean',
-    'js',
+    'build-js',
     'bower',
     'jshint',
     'build-template',
