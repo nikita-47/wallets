@@ -18,6 +18,7 @@ const templateCache = require('gulp-angular-templatecache');
 const ghPages = require('gulp-gh-pages');
 const cssmin = require('gulp-cssmin');
 
+
 // cleans the build output
 gulp.task('clean', function (cb) {
   del([
@@ -38,13 +39,11 @@ gulp.task('bower', function () {
 gulp.task('build-template', function () {
   return gulp.src(['./app/**/*.html', '!./app/bower_components/**'])
     .pipe(templateCache('templates.js', {standalone: true}))
-    .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
     }))
     .pipe(ngAnnotate())
     .pipe(uglify())
-    .pipe(sourcemaps.write())
     .pipe(gulp.dest('./dist/js/'));
 });
 
@@ -71,6 +70,12 @@ gulp.task('build-index', function () {
 });
 
 
+gulp.task('favicon', function () {
+  return gulp.src('./app/favicon.ico')
+    .pipe(gulp.dest('./dist/'));
+});
+
+
 // copy semantic-ui assets
 gulp.task('build-assets', function () {
   return gulp.src('./app/bower_components/semantic/dist/themes/default/assets/**/*.*')
@@ -85,7 +90,9 @@ gulp.task('build', [
     'jshint',
     'build-template',
     'build-index',
-    'build-assets'],
+    'build-assets',
+    'favicon'
+  ],
   function () {
   }
 );
@@ -115,6 +122,7 @@ gulp.task('server', function () {
     }));
 });
 
+
 // Deploy to gh-pages
 gulp.task('deploy', function () {
   return gulp.src('./dist/**/*')
@@ -122,29 +130,13 @@ gulp.task('deploy', function () {
 });
 
 
-// runs karma tests
-gulp.task('test', function () {
-  var testFiles = [
-    './app/controllers/**/*.js'
-  ];
-
-  return gulp.src(testFiles)
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function (err) {
-      console.log('karma tests failed: ' + err);
-      throw err;
-    });
-});
-
 // runs jshint
 gulp.task('jshint', function () {
   gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
     .pipe(jshint({esversion: 6}))
     .pipe(jshint.reporter('jshint-stylish'));
 });
+
 
 // launch a build upon modification and publish it to a running server
 gulp.task('dev', ['build', 'watch', 'server']);
