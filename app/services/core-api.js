@@ -1,12 +1,15 @@
 angular
   .module(
-    'core-api', []
+    'core-api', [
+      'walletsAppConfig'
+    ]
   );
 
 angular
   .module('core-api').factory('api', [
-  function () {
-    const baseUrl = 'https://livedemo.xsolla.com/fe/test-task/baev';
+  '$injector',
+  function ($injector) {
+    const baseUrl = $injector.get('appConfig').baseUrl;
     return function api($http) {
       /**
        * Add callbacks
