@@ -27,7 +27,7 @@ gulp.task('clean', function (cb) {
 
 
 // runs bower to install frontend dependencies
-gulp.task('bower', function() {
+gulp.task('bower', function () {
   const install = require("gulp-install");
   return gulp.src(['./bower.json'])
     .pipe(install());
@@ -35,9 +35,9 @@ gulp.task('bower', function() {
 
 
 // build templates
-gulp.task('build-template', function() {
+gulp.task('build-template', function () {
   return gulp.src(['./app/**/*.html', '!./app/bower_components/**'])
-    .pipe(templateCache('templates.js', { standalone: true }))
+    .pipe(templateCache('templates.js', {standalone: true}))
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
@@ -54,7 +54,7 @@ gulp.task('build-index', function () {
   return gulp.src('./app/index.html')
     .pipe(usemin({
       css: [cssmin(), rev()],
-      html: [htmlmin({ collapseWhitespace: true })],
+      html: [htmlmin({collapseWhitespace: true})],
       js: [uglify(), rev()],
       app: [
         sourcemaps.init(),
@@ -71,33 +71,42 @@ gulp.task('build-index', function () {
 });
 
 
-// full build
-gulp.task('build', [
-  'clean',
-  'bower',
-  'jshint',
-  'build-template',
-  'build-index'],
-  function() {
+// copy semantic-ui assets
+gulp.task('build-assets', function () {
+  return gulp.src('./app/bower_components/semantic/dist/themes/default/assets/**/*.*')
+    .pipe(gulp.dest('./dist/css/themes/default/assets/'));
 });
 
 
+// full build
+gulp.task('build', [
+    'clean',
+    'bower',
+    'jshint',
+    'build-template',
+    'build-index',
+    'build-assets'],
+  function () {
+  }
+);
+
+
 // watches file system and triggers a build when a modification is detected
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   return gulp.watch([
-    './app/index.html',
-    './app/**/**/*.html',
-    './app/**/*.css',
-    './app/**/**/*.js',
-    './app/**/*.html',
-    './app/**/*.js',
-    './app/*.js'],
+      './app/index.html',
+      './app/**/**/*.html',
+      './app/**/*.css',
+      './app/**/**/*.js',
+      './app/**/*.html',
+      './app/**/*.js',
+      './app/*.js'],
     ['build']);
 });
 
 
 // launches a web server that serves files in the current directory
-gulp.task('server', function() {
+gulp.task('server', function () {
   gulp.src('dist')
     .pipe(webserver({
       livereload: false,
@@ -107,33 +116,33 @@ gulp.task('server', function() {
 });
 
 // Deploy to gh-pages
-gulp.task('deploy', function() {
+gulp.task('deploy', function () {
   return gulp.src('./dist/**/*')
     .pipe(ghPages());
 });
 
 
 // runs karma tests
-gulp.task('test', function() {
-    var testFiles = [
-        './app/controllers/**/*.js'
-    ];
+gulp.task('test', function () {
+  var testFiles = [
+    './app/controllers/**/*.js'
+  ];
 
-    return gulp.src(testFiles)
-        .pipe(karma({
-            configFile: 'karma.conf.js',
-            action: 'run'
-        }))
-        .on('error', function(err) {
-            console.log('karma tests failed: ' + err);
-            throw err;
-        });
+  return gulp.src(testFiles)
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'run'
+    }))
+    .on('error', function (err) {
+      console.log('karma tests failed: ' + err);
+      throw err;
+    });
 });
 
 // runs jshint
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
   gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
-    .pipe(jshint({ esversion: 6 }))
+    .pipe(jshint({esversion: 6}))
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
