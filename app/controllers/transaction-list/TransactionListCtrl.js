@@ -7,7 +7,7 @@ angular
   .module('transactionList')
   .component('transactionList', {
     templateUrl: 'controllers/transaction-list/TransactionListTemplate.html',
-    controllerAs: '$ctrlTransactionList',
+    controllerAs: '$ctrlTransList',
     controller: [
       'UserTransactions',
       '$stateParams',
@@ -15,33 +15,54 @@ angular
         UserTransactions,
         $stateParams) {
 
-        const $ctrlTransactionList = this;
-        $ctrlTransactionList.userId = $stateParams.id;
-        const params =  {
-          datetime_from: '2015-01-01T00:00:00 UTC',
-          datetime_to: '2017-03-03T00:00:00 UTC'
+        const $ctrlTransList = this;
+        $ctrlTransList.userId = $stateParams.id;
+        $ctrlTransList.params =  {
+          datetime_from: moment().subtract(6, 'days').utc().format(),
+          datetime_to: moment().utc().format()
         };
-        $ctrlTransactionList.isLoading = true;
-        UserTransactions(
-          $ctrlTransactionList.userId,
-          params,
-          function (response) {
-            $ctrlTransactionList.isLoading = false;
-            $ctrlTransactionList.transactions = response.data;
-          },
-          function () {
-            $ctrlTransactionList.isLoading = false;
-          }
-        );
 
-        $('#rangestart').calendar({
-          type: 'date',
-          endCalendar: $('#rangeend')
+        loadTransactions();
+
+        angular.element(document).ready(function () {
+          $('#rangestart').calendar({
+            type: 'date',
+            monthFirst: true,
+            endCalendar: $('#rangeend'),
+            firstDayOfWeek: 1,
+            onChange: function (date) {
+              $ctrlTransList.params.datetime_from = moment(date).utc().format();
+            },
+          });
+          $('#rangeend').calendar({
+            type: 'date',
+            monthFirst: true,
+            firstDayOfWeek: 1,
+            startCalendar: $('#rangestart'),
+            onChange: function (date) {
+              $ctrlTransList.params.datetime_to = moment(date).utc().format();
+            },
+          });
         });
-        $('#rangeend').calendar({
-          type: 'date',
-          startCalendar: $('#rangestart')
-        });
+
+        $ctrlTransList.reloadTrans = function () {
+          loadTransactions();
+        };
+
+        function loadTransactions() {
+          $ctrlTransList.isLoading = true;
+          UserTransactions(
+            $ctrlTransList.userId,
+            $ctrlTransList.params,
+            function (response) {
+              $ctrlTransList.isLoading = false;
+              $ctrlTransList.transactions = response.data;
+            },
+            function () {
+              $ctrlTransList.isLoading = false;
+            }
+          );
+        }
 
       }
     ]
