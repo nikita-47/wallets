@@ -2,21 +2,18 @@ const gulp = require('gulp'),
   webserver = require('gulp-webserver'),
   del = require('del'),
   sourcemaps = require('gulp-sourcemaps'),
-  source = require('vinyl-source-stream'),
-  buffer = require('vinyl-buffer'),
   uglify = require('gulp-uglify'),
-  jshint = require('gulp-jshint');
-const karma = require('gulp-karma');
-const stylish = require('jshint-stylish');
-const usemin = require('gulp-usemin');
-const babel = require('gulp-babel');
-const ngAnnotate = require('gulp-ng-annotate');
-const concat = require('gulp-concat');
-const rev = require('gulp-rev');
-const htmlmin = require('gulp-htmlmin');
-const templateCache = require('gulp-angular-templatecache');
-const ghPages = require('gulp-gh-pages');
-const cssmin = require('gulp-cssmin');
+  jshint = require('gulp-jshint'),
+  stylish = require('jshint-stylish'),
+  usemin = require('gulp-usemin'),
+  babel = require('gulp-babel'),
+  ngAnnotate = require('gulp-ng-annotate'),
+  concat = require('gulp-concat'),
+  rev = require('gulp-rev'),
+  htmlmin = require('gulp-htmlmin'),
+  templateCache = require('gulp-angular-templatecache'),
+  ghPages = require('gulp-gh-pages'),
+  cssmin = require('gulp-cssmin');
 
 
 // cleans the build output
@@ -82,7 +79,7 @@ gulp.task('jshint', function () {
     './app/*.js',
     '!./app/bower_components/**'
   ])
-    .pipe(jshint({ esversion: 6 }))
+    .pipe(jshint({esversion: 6}))
     .pipe(jshint.reporter('jshint-stylish'));
 });
 

@@ -29,13 +29,13 @@ angular
       'UpdateUser',
       'OneUser',
       '$stateParams',
-      '$location',
+      '$state',
       function (
         CreateUser,
         UpdateUser,
         OneUser,
         $stateParams,
-        $location) {
+        $state) {
         const $ctrlEdit = this;
 
         $ctrlEdit.user = {
@@ -86,7 +86,7 @@ angular
                     $ctrlEdit.errors.push({message: response.data.message});
                   }
                 } else {
-                  $location.path('/users/edit/' + user.user_id);
+                  $state.go('user-detail', { id: user.user_id });
                 }
               },
               function (error) {

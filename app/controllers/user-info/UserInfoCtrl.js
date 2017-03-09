@@ -10,8 +10,10 @@ angular
     controllerAs: '$ctrlInfo',
     controller: [
       'OneUser',
+      '$rootScope',
       '$stateParams',
       function (OneUser,
+                $rootScope,
                 $stateParams) {
 
         const $ctrlInfo = this;
@@ -19,17 +21,25 @@ angular
         $ctrlInfo.user = {};
 
         $ctrlInfo.userId = $stateParams.id;
-        $ctrlInfo.isLoading = true;
-        OneUser(
-          $ctrlInfo.userId,
-          function (response) {
-            $ctrlInfo.user = response.data;
-            $ctrlInfo.isLoading = false;
-          },
-          function () {
-            $ctrlInfo.isLoading = false;
-          }
-        );
+        loadUser();
+
+        $rootScope.$on('newRecharge', () => {
+          loadUser();
+        });
+
+        function loadUser() {
+          $ctrlInfo.isLoading = true;
+          OneUser(
+            $ctrlInfo.userId,
+            function (response) {
+              $ctrlInfo.user = response.data;
+              $ctrlInfo.isLoading = false;
+            },
+            function () {
+              $ctrlInfo.isLoading = false;
+            }
+          );
+        }
 
       }
     ]

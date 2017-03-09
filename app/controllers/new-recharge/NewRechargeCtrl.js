@@ -10,10 +10,12 @@ angular
     controllerAs: '$ctrlNewRecharge',
     controller: [
       'NewRecharge',
+      '$rootScope',
       '$stateParams',
-      function (
-        NewRecharge,
-        $stateParams) {
+      function (NewRecharge,
+                $rootScope,
+                $stateParams) {
+
         const $ctrlNewRecharge = this;
 
         $ctrlNewRecharge.userId = $stateParams.id;
@@ -41,6 +43,8 @@ angular
                   $ctrlNewRecharge.errors.push(
                     {message: response.data.message}
                   );
+                } else {
+                  $rootScope.$broadcast('newRecharge', {});
                 }
               }
             },
@@ -51,6 +55,7 @@ angular
           );
 
         };
+
       }
     ]
   });

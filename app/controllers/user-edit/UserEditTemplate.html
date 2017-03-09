@@ -44,10 +44,10 @@
           name="email"
           placeholder="Email">
     </div>
-    <div class="field">
+    <div class="field"
+         ng-if="$ctrlEdit.userId">
       <div class="ui checkbox">
         <input
-            ng-if="$ctrlEdit.userId"
             type="checkbox"
             name="enabled"
             title="Enabled"

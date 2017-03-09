@@ -31,9 +31,15 @@ userListCtrl.controller('UserListCtrl', [
 
     $ctrlUserList.openUser = function (userId) {
       const $state = $injector.get('$state');
-      $state.go('user-detail', {id: userId});
+      $state.go('user-detail', { id: userId });
     };
 
+    /**
+     *
+     * @param c - current page
+     * @param m - total pages count
+     * @returns {Array}
+     */
     function pagination(c, m) {
       let current = c,
         last = m,
@@ -80,7 +86,7 @@ userListCtrl.controller('UserListCtrl', [
             resp.data.recordsTotal / pageLimit
           );
 
-          const currentPage = pageOffset / pageLimit  + 1;
+          const currentPage = pageOffset / pageLimit + 1;
 
           $ctrlUserList.currentPage = currentPage;
 
