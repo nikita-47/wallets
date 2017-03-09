@@ -28,7 +28,8 @@ walletsApp
 
       $stateProvider.state('user-transactions',{
         url: '/user/transactions?id',
-        templateUrl: 'controllers/user-transactions/UserTransactionsTemplate.html',
+        templateUrl:
+          'controllers/user-transactions/UserTransactionsTemplate.html',
         controllerAs: '$ctrlUserTransactions',
         controller: 'UserTransactionsCtrl'
       });

@@ -19,13 +19,20 @@ angular
         const $ctrlNewRecharge = this;
 
         $ctrlNewRecharge.userId = $stateParams.id;
-        $ctrlNewRecharge.newTransaction = {
+        $ctrlNewRecharge.newRecharge = {
           amount: '',
           comment: ''
         };
 
-        $ctrlNewRecharge.submitRecharge = function (newRecharge) {
+        $ctrlNewRecharge.submitRecharge = function () {
           $ctrlNewRecharge.errors = [];
+
+          if (!$ctrlNewRecharge.newRecharge.comment) {
+            $ctrlNewRecharge
+              .errors
+              .push({ message: 'Comment should not be blank' });
+            return;
+          }
 
           if ($ctrlNewRecharge.errors.length > 0) {
             return;
@@ -35,21 +42,25 @@ angular
 
           NewRecharge(
             $ctrlNewRecharge.userId,
-            newRecharge,
+            $ctrlNewRecharge.newRecharge,
             function (response) {
               $ctrlNewRecharge.isLoading = false;
               if (response.data) {
                 if (!response.data.amount) {
                   $ctrlNewRecharge.errors.push(
-                    {message: response.data.message}
+                    { message: response.data.message }
                   );
                 } else {
                   $rootScope.$broadcast('newRecharge', {});
+                  $ctrlNewRecharge.newRecharge = {
+                    amount: '',
+                    comment: ''
+                  };
                 }
               }
             },
             function (error) {
-              $ctrlNewRecharge.errors.push({message: error.message});
+              $ctrlNewRecharge.errors.push({ message: error.message });
               $ctrlNewRecharge.isLoading = false;
             }
           );

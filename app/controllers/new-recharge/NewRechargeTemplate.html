@@ -1,21 +1,21 @@
 <div class="ui segment">
   <form
-      ng-submit="$ctrlNewRecharge.submitRecharge($ctrlNewRecharge.newRecharge)"
+      ng-submit="$ctrlNewRecharge.submitRecharge()"
       class="ui form" novalidate>
     <div class="field">
       <label>Amount</label>
       <input
+          type="number"
+          name="amount"
           ng-model="$ctrlNewRecharge.newRecharge.amount"
-          type="text"
-          name="user-name"
           placeholder="Amount">
     </div>
     <div class="field">
       <label>Comment</label>
       <input
-          ng-model="$ctrlNewRecharge.newRecharge.comment"
           type="text"
-          name="user-name"
+          ng-model="$ctrlNewRecharge.newRecharge.comment"
+          name="comment"
           placeholder="Comment">
     </div>
     <button
