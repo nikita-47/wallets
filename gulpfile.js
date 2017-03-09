@@ -54,22 +54,13 @@ gulp.task('build-index', function () {
     .pipe(usemin({
       css: [cssmin(), rev()],
       html: [htmlmin({collapseWhitespace: true})],
-      js: [uglify(), rev()],
-      app: [
-        sourcemaps.init(),
-        babel({
-          presets: ['es2015']
-        }),
-        ngAnnotate(),
-        uglify(),
-        rev(),
-        sourcemaps.write()
-      ]
+      js: [uglify(), rev()]
     }))
     .pipe(gulp.dest('./dist/'));
 });
 
 
+// copy favicon
 gulp.task('favicon', function () {
   return gulp.src('./app/favicon.ico')
     .pipe(gulp.dest('./dist/'));
@@ -83,9 +74,43 @@ gulp.task('build-assets', function () {
 });
 
 
+// runs jshint
+gulp.task('jshint', function () {
+  gulp.src([
+    './app/**/**/*.js',
+    './app/**/*.js',
+    './app/*.js',
+    '!./app/bower_components/**'
+  ])
+    .pipe(jshint({esversion: 6}))
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
+
+// build application
+gulp.task('js', function () {
+  gulp.src([
+    './app/**/**/*.js',
+    './app/**/*.js',
+    './app/*.js',
+    '!./app/bower_components/**'
+  ])
+    .pipe(sourcemaps.init())
+    .pipe(concat('app.js'))
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(ngAnnotate())
+    .pipe(uglify())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./dist/js/'));
+});
+
+
 // full build
 gulp.task('build', [
     'clean',
+    'js',
     'bower',
     'jshint',
     'build-template',
@@ -127,14 +152,6 @@ gulp.task('server', function () {
 gulp.task('deploy', function () {
   return gulp.src('./dist/**/*')
     .pipe(ghPages());
-});
-
-
-// runs jshint
-gulp.task('jshint', function () {
-  gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
-    .pipe(jshint({esversion: 6}))
-    .pipe(jshint.reporter('jshint-stylish'));
 });
 
 
