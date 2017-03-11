@@ -1,12 +1,12 @@
-const userTransactionsCtrl = angular.module('userTransactions', [
-  'ui.router',
-  'transactionList'
+var userTransactionsCtrl = angular.module('userTransactions', [
+    'ui.router',
+    'transactionList'
 ]);
 
 userTransactionsCtrl.controller('UserTransactionsCtrl', [
-  '$stateParams',
-  function ($stateParams) {
-    const $ctrlUserTransactions = this;
-    $ctrlUserTransactions.id = $stateParams.id;
-  }
+    '$stateParams',
+    function ($stateParams) {
+        var $ctrlUserTransactions = this;
+        $ctrlUserTransactions.id = $stateParams.id;
+    }
 ]);

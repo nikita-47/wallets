@@ -1,85 +1,85 @@
 <div class="ui segment">
-  <h3
-      class="ui header"
-      ng-if="!$ctrlEdit.userId"
-  >Create new user</h3>
-  <h3
-      class="ui header"
-      ng-if="$ctrlEdit.userId"
-  >Update user</h3>
-  <form
-      class="ui form"
-      ng-submit="$ctrlEdit.submitUser($ctrlEdit.user)"
-      novalidate>
-    <div class="field">
-      <label>User ID</label>
-      <input
-          ng-disabled="$ctrlEdit.userId"
-          ng-model="$ctrlEdit.user.user_id"
-          type="text"
-          name="user-id"
-          placeholder="User ID">
-    </div>
-    <div class="field">
-      <label>User Name</label>
-      <input
-          ng-model="$ctrlEdit.user.user_name"
-          type="text"
-          name="user-name"
-          placeholder="User Name">
-    </div>
-    <div class="field">
-      <label>Custom parameter for user identification</label>
-      <input
-          type="text"
-          name="parameter"
-          ng-model="$ctrlEdit.user.user_custom"
-          placeholder="Custom parameter for user identification">
-    </div>
-    <div class="field">
-      <label>Email</label>
-      <input
-          ng-model="$ctrlEdit.user.email"
-          type="text"
-          name="email"
-          placeholder="Email">
-    </div>
-    <div class="field"
-         ng-if="$ctrlEdit.userId">
-      <div class="ui checkbox">
-        <input
-            type="checkbox"
-            name="enabled"
-            title="Enabled"
-            ng-model="$ctrlEdit.user.enabled"
-        >
-        <label>Enabled</label>
-      </div>
-    </div>
-    <button
-        class="ui positive button"
-        type="submit"
-        ng-if="$ctrlEdit.userId"
-        ng-disabled="$ctrlEdit.isLoading">Update
-    </button>
-    <button
-        class="ui positive button"
-        type="submit"
+    <h3
+        class="ui header"
         ng-if="!$ctrlEdit.userId"
-        ng-disabled="$ctrlEdit.isLoading">Create
-    </button>
-  </form>
-  <div class="ui active inverted dimmer"
-       ng-if="$ctrlEdit.isLoading"
-  >
-    <div class="ui loader"></div>
-  </div>
-  <div
-      ng-repeat="error in $ctrlEdit.errors"
-      class="ui negative message">
-    <div ng-if="error.header" class="header">
-      {{ error.header }}
+    >Create new user</h3>
+    <h3
+        class="ui header"
+        ng-if="$ctrlEdit.userId"
+    >Update user</h3>
+    <form
+        class="ui form"
+        ng-submit="$ctrlEdit.submitUser($ctrlEdit.user)"
+        novalidate>
+        <div class="field">
+            <label>User ID</label>
+            <input
+                ng-disabled="$ctrlEdit.userId"
+                ng-model="$ctrlEdit.user.user_id"
+                type="text"
+                name="user-id"
+                placeholder="User ID">
+        </div>
+        <div class="field">
+            <label>User Name</label>
+            <input
+                ng-model="$ctrlEdit.user.user_name"
+                type="text"
+                name="user-name"
+                placeholder="User Name">
+        </div>
+        <div class="field">
+            <label>Custom parameter for user identification</label>
+            <input
+                type="text"
+                name="parameter"
+                ng-model="$ctrlEdit.user.user_custom"
+                placeholder="Custom parameter for user identification">
+        </div>
+        <div class="field">
+            <label>Email</label>
+            <input
+                ng-model="$ctrlEdit.user.email"
+                type="text"
+                name="email"
+                placeholder="Email">
+        </div>
+        <div class="field"
+             ng-if="$ctrlEdit.userId">
+            <div class="ui checkbox">
+                <input
+                    type="checkbox"
+                    name="enabled"
+                    title="Enabled"
+                    ng-model="$ctrlEdit.user.enabled"
+                >
+                <label>Enabled</label>
+            </div>
+        </div>
+        <button
+            class="ui positive button"
+            type="submit"
+            ng-if="$ctrlEdit.userId"
+            ng-disabled="$ctrlEdit.isLoading">Update
+        </button>
+        <button
+            class="ui positive button"
+            type="submit"
+            ng-if="!$ctrlEdit.userId"
+            ng-disabled="$ctrlEdit.isLoading">Create
+        </button>
+    </form>
+    <div class="ui active inverted dimmer"
+         ng-if="$ctrlEdit.isLoading"
+    >
+        <div class="ui loader"></div>
     </div>
-    <p>{{ error.message }}</p>
-  </div>
+    <div
+        ng-repeat="error in $ctrlEdit.errors"
+        class="ui negative message">
+        <div ng-if="error.header" class="header">
+            {{ error.header }}
+        </div>
+        <p>{{ error.message }}</p>
+    </div>
 </div>

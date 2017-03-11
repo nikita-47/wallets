@@ -1,47 +1,48 @@
 <div class="ui segment">
-  <div class="ui horizontal tiny statistics">
-    <div class="ui statistic">
-      <div class="value">
-        {{ $ctrlInfo.user.register_date | date : "dd/MM/yyyy" }}
-      </div>
-      <div class="label">
-        Register date
-      </div>
+    <div class="ui horizontal tiny statistics">
+        <div class="ui statistic">
+            <div class="value">
+                {{ $ctrlInfo.user.register_date | date : "dd/MM/yyyy" }}
+            </div>
+            <div class="label">
+                Register date
+            </div>
+        </div>
+        <div class="statistic"
+             ng-if="$ctrlInfo.user.wallet_currency"
+        >
+            <div class="value">
+                {{ $ctrlInfo.user.wallet_currency }}
+            </div>
+            <div class="label">
+                Currency
+            </div>
+        </div>
+        <div class="statistic">
+            <div class="value">
+                {{ $ctrlInfo.user.balance }}
+            </div>
+            <div class="label">
+                Balance
+            </div>
+        </div>
+        <div class="statistic">
+            <div class="value">
+                {{ $ctrlInfo.user.wallet_amount }}
+            </div>
+            <div class="label">
+                Wallet Amount
+            </div>
+        </div>
     </div>
-    <div class="statistic"
-         ng-if="$ctrlInfo.user.wallet_currency"
+    <button
+        class="ui positive button"
+        ui-sref="user-transactions({ id: $ctrlInfo.user.user_id })"
+    >Show transactions
+    </button>
+    <div class="ui active inverted dimmer"
+         ng-if="$ctrlInfo.isLoading"
     >
-      <div class="value">
-        {{ $ctrlInfo.user.wallet_currency }}
-      </div>
-      <div class="label">
-        Currency
-      </div>
+        <div class="ui loader"></div>
     </div>
-    <div class="statistic">
-      <div class="value">
-        {{ $ctrlInfo.user.balance }}
-      </div>
-      <div class="label">
-        Balance
-      </div>
-    </div>
-    <div class="statistic">
-      <div class="value">
-        {{ $ctrlInfo.user.wallet_amount }}
-      </div>
-      <div class="label">
-        Wallet Amount
-      </div>
-    </div>
-  </div>
-  <button
-      class="ui positive button"
-      ui-sref="user-transactions({ id: $ctrlInfo.user.user_id })"
-  >Show transactions</button>
-  <div class="ui active inverted dimmer"
-       ng-if="$ctrlInfo.isLoading"
-  >
-    <div class="ui loader"></div>
-  </div>
 </div>
