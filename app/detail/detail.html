@@ -1,0 +1,163 @@
+<div class="ui container">
+    <div class="ui stackable two column grid">
+        <div class="row">
+            <button
+                class="ui button"
+                ui-sref="user-list"
+            >Back to all users
+            </button>
+        </div>
+        <div class="row">
+            <div class="eight wide column">
+                <div class="ui segment">
+                    <h3
+                        class="ui header"
+                        ng-if="!vm.userId"
+                    >Create new user</h3>
+                    <h3
+                        class="ui header"
+                        ng-if="vm.userId"
+                    >Update user</h3>
+                    <form
+                        class="ui form"
+                        ng-submit="vm.submitUser(vm.user)"
+                        novalidate>
+                        <div class="field">
+                            <label>User ID</label>
+                            <input
+                                ng-disabled="vm.userId"
+                                ng-model="vm.user.user_id"
+                                type="text"
+                                name="user-id"
+                                placeholder="User ID">
+                        </div>
+                        <div class="field">
+                            <label>User Name</label>
+                            <input
+                                ng-model="vm.user.user_name"
+                                type="text"
+                                name="user-name"
+                                placeholder="User Name">
+                        </div>
+                        <div class="field">
+                            <label>Custom parameter for user identification</label>
+                            <input
+                                type="text"
+                                name="parameter"
+                                ng-model="vm.user.user_custom"
+                                placeholder="Custom parameter for user identification">
+                        </div>
+                        <div class="field">
+                            <label>Email</label>
+                            <input
+                                ng-model="vm.user.email"
+                                type="text"
+                                name="email"
+                                placeholder="Email">
+                        </div>
+                        <div class="field"
+                             ng-if="vm.userId">
+                            <div class="ui checkbox">
+                                <input
+                                    type="checkbox"
+                                    name="enabled"
+                                    title="Enabled"
+                                    ng-model="vm.user.enabled"
+                                >
+                                <label>Enabled</label>
+                            </div>
+                        </div>
+                        <button
+                            class="ui positive button"
+                            type="submit"
+                            ng-if="vm.userId"
+                            ng-disabled="vm.isLoading">Update
+                        </button>
+                        <button
+                            class="ui positive button"
+                            type="submit"
+                            ng-if="!vm.userId"
+                            ng-disabled="vm.isLoading">Create
+                        </button>
+                    </form>
+                    <div class="ui active inverted dimmer"
+                         ng-if="vm.isLoading"
+                    >
+                        <div class="ui loader"></div>
+                    </div>
+                    <div
+                        ng-repeat="error in vm.errors"
+                        class="ui negative message">
+                        <div ng-if="error.header" class="header">
+                            {{ error.header }}
+                        </div>
+                        <p>{{ error.message }}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="eight wide column">
+                <div class="ui grid">
+                    <div class="row">
+                        <div class="sixteen wide column">
+                            <div class="ui segment">
+                                <div class="ui horizontal tiny statistics">
+                                    <div class="ui statistic">
+                                        <div class="value">
+                                            {{ vm.user.register_date | date : "dd/MM/yyyy" }}
+                                        </div>
+                                        <div class="label">
+                                            Register date
+                                        </div>
+                                    </div>
+                                    <div class="statistic"
+                                         ng-if="vm.user.wallet_currency"
+                                    >
+                                        <div class="value">
+                                            {{ vm.user.wallet_currency }}
+                                        </div>
+                                        <div class="label">
+                                            Currency
+                                        </div>
+                                    </div>
+                                    <div class="statistic">
+                                        <div class="value">
+                                            {{ vm.user.balance }}
+                                        </div>
+                                        <div class="label">
+                                            Balance
+                                        </div>
+                                    </div>
+                                    <div class="statistic">
+                                        <div class="value">
+                                            {{ vm.user.wallet_amount }}
+                                        </div>
+                                        <div class="label">
+                                            Wallet Amount
+                                        </div>
+                                    </div>
+                                </div>
+                                <button
+                                    class="ui positive button"
+                                    ui-sref="user-transactions({ id: vm.user.user_id })"
+                                >Show transactions
+                                </button>
+                                <div class="ui active inverted dimmer"
+                                     ng-if="vm.isLoading"
+                                >
+                                    <div class="ui loader"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="sixteen wide column">
+                            <new-recharge ng-if="vm.id"></new-recharge>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

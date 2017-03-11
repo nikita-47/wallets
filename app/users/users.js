@@ -26,7 +26,8 @@
 
         function openUser(userId) {
             var $state = $injector.get('$state');
-            $state.go('user-detail', {id: userId});
+            console.log(userId);
+            $state.go('detail', { id: userId });
         }
 
         function selectPerPage(limit) {

@@ -54,16 +54,23 @@
             });
         }
 
-        function handleRoutingErrors() {
-            $rootScope.$on('$stateChangeError',
-                function () {
-                    $location.path('/users');
-                }
-            );
+        function init() {
+            handleStateChangeError();
+            handleStateChangeSuccess();
         }
 
-        function init() {
-            handleRoutingErrors();
+        function handleStateChangeSuccess() {
+            $rootScope.$on('$stateChangeSuccess', function () {
+                $rootScope.currentUrl = $location.url();
+            });
+        }
+
+        function handleStateChangeError() {
+            $rootScope.$on('$stateChangeError',
+                function () {
+                    $state.go('user-list');
+                }
+            );
         }
 
         function getStates() {

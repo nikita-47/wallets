@@ -2,22 +2,22 @@
     'use strict';
 
     angular
-        .module('app.users')
+        .module('app.detail')
         .run(appRun);
 
     /* @ngInject */
     appRun.$inject = ['statehelper'];
-    function appRun(statehelper) {
-        statehelper.configureStates(getStates());
+    function appRun(routerHelper) {
+        routerHelper.configureStates(getStates());
     }
 
     function getStates() {
         return [
             {
-                state: 'user-list',
+                state: 'detail',
                 config: {
-                    url: '/users',
-                    templateUrl: 'app/users/users.html',
+                    url: '/user?id',
+                    templateUrl: 'app/detail/detail.html',
                     controller: 'Users',
                     controllerAs: 'vm'
                 }

@@ -4,7 +4,8 @@
     angular.module('app', [
         'app.router',
         'app.core',
-        'app.users'
+        'app.users',
+        'app.detail'
     ]);
 
 })();
