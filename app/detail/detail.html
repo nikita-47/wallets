@@ -12,11 +12,11 @@
                 <div class="ui segment">
                     <h3
                         class="ui header"
-                        ng-if="!vm.userId"
+                        ng-if="!vm.id"
                     >Create new user</h3>
                     <h3
                         class="ui header"
-                        ng-if="vm.userId"
+                        ng-if="vm.id"
                     >Update user</h3>
                     <form
                         class="ui form"
@@ -25,7 +25,7 @@
                         <div class="field">
                             <label>User ID</label>
                             <input
-                                ng-disabled="vm.userId"
+                                ng-disabled="vm.id"
                                 ng-model="vm.user.user_id"
                                 type="text"
                                 name="user-id"
@@ -56,7 +56,7 @@
                                 placeholder="Email">
                         </div>
                         <div class="field"
-                             ng-if="vm.userId">
+                             ng-if="vm.id">
                             <div class="ui checkbox">
                                 <input
                                     type="checkbox"
@@ -70,13 +70,13 @@
                         <button
                             class="ui positive button"
                             type="submit"
-                            ng-if="vm.userId"
+                            ng-if="vm.id"
                             ng-disabled="vm.isLoading">Update
                         </button>
                         <button
                             class="ui positive button"
                             type="submit"
-                            ng-if="!vm.userId"
+                            ng-if="!vm.id"
                             ng-disabled="vm.isLoading">Create
                         </button>
                     </form>
@@ -96,7 +96,9 @@
                 </div>
 
             </div>
-            <div class="eight wide column">
+            <div class="eight wide column"
+                 ng-if="vm.id"
+            >
                 <div class="ui grid">
                     <div class="row">
                         <div class="sixteen wide column">
@@ -153,7 +155,47 @@
                     </div>
                     <div class="row">
                         <div class="sixteen wide column">
-                            <new-recharge ng-if="vm.id"></new-recharge>
+                            <div class="ui segment">
+                                <form
+                                    ng-submit="vm.submitRecharge()"
+                                    class="ui form" novalidate>
+                                    <div class="field">
+                                        <label>Amount</label>
+                                        <input
+                                            type="number"
+                                            name="amount"
+                                            ng-model="vm.newRecharge.amount"
+                                            placeholder="Amount">
+                                    </div>
+                                    <div class="field">
+                                        <label>Comment</label>
+                                        <input
+                                            type="text"
+                                            ng-model="vm.newRecharge.comment"
+                                            name="comment"
+                                            placeholder="Comment">
+                                    </div>
+                                    <button
+                                        class="ui positive button"
+                                        type="submit"
+                                        ng-disabled="vm.isLoading"
+                                    >New recharge
+                                    </button>
+                                    <div class="ui active inverted dimmer"
+                                         ng-if="vm.isLoading"
+                                    >
+                                        <div class="ui loader"></div>
+                                    </div>
+                                </form>
+                                <div
+                                    ng-repeat="error in vm.errors"
+                                    class="ui negative message">
+                                    <div ng-if="error.header" class="header">
+                                        {{ error.header }}
+                                    </div>
+                                    <p>{{ error.message }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

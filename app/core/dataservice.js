@@ -14,6 +14,8 @@
         var service = {
             getUsers: getUsers,
             getOneUser: getOneUser,
+            createUser: createUser,
+            updateUser: updateUser,
             ready: ready
         };
 
@@ -32,9 +34,29 @@
         //
         function getOneUser(id) {
             return $http.get(baseUrl + '/users/' + id)
-                .then(getUsersComplete);
+                .then(getOneUserComplete);
 
-            function getUsersComplete(data, status, headers, config) {
+            function getOneUserComplete(data, status, headers, config) {
+                return data.data;
+            }
+        }
+
+        //
+        function createUser(data) {
+            return $http.post(baseUrl + '/users', data)
+                .then(createComplete);
+
+            function createComplete(data, status, headers, config) {
+                return data.data;
+            }
+        }
+
+        //
+        function updateUser(id, data) {
+            return $http.put(baseUrl + '/users/' + id, data)
+                .then(updateComplete);
+
+            function updateComplete(data, status, headers, config) {
                 return data.data;
             }
         }

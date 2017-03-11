@@ -18,7 +18,7 @@
                 config: {
                     url: '/user?id',
                     templateUrl: 'app/detail/detail.html',
-                    controller: 'Users',
+                    controller: 'Detail',
                     controllerAs: 'vm'
                 }
             }
