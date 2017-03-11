@@ -36,9 +36,6 @@
         }
 
         function setPage(page) {
-            if (!Number.isInteger(page)) {
-                return;
-            }
             vm.pageParams.offset = page * vm.pageParams.limit;
             activate();
         }

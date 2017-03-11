@@ -4,25 +4,33 @@ describe("Testing Users", function () {
     var users;
     beforeEach(module('app.users'));
 
-    var scope, vm;
-    beforeEach(inject(function (_$rootScope_) {
-        scope = _$rootScope_.$new();
-        vm = $controller('Users', { $scope: scope });
-    }));
-
-    // 2. Inject $controller
     var Ctrl;
     beforeEach(inject(function($controller) {
         Ctrl = $controller('Users');
     }));
 
-    // 4. Test the controller
-    it("should have a value", function() {
+    it("should have a empty user list", function() {
         expect(Ctrl.users).toEqual([]);
     });
 
-    it("should have a message", function() {
-        expect(Ctrl.getMessage()).toEqual("easy!");
+    it("should have a 5 users per page", function() {
+        expect(Ctrl.pageParams.limit).toEqual(5);
+    });
+
+    it("should have a 10 offset", function() {
+        Ctrl.setPage(2);
+        expect(Ctrl.pageParams.offset).toEqual(10);
+    });
+
+    it("should have a 30 offset", function() {
+        Ctrl.selectPerPage(15);
+        Ctrl.setPage(2);
+        expect(Ctrl.pageParams.offset).toEqual(30);
+    });
+
+    it("should have a 15 users per page", function() {
+        Ctrl.selectPerPage(15);
+        expect(Ctrl.pageParams.limit).toEqual(15);
     });
 
 });
