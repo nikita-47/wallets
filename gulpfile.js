@@ -39,7 +39,7 @@ gulp.task('bower', function () {
 
 // build from index file
 gulp.task('build-index', function () {
-    return gulp.src('./app/index.html')
+    return gulp.src(paths.index)
         .pipe(usemin())
         .pipe(gulp.dest('./dist/'));
 });
@@ -47,7 +47,7 @@ gulp.task('build-index', function () {
 
 // copy favicon
 gulp.task('favicon', function () {
-    return gulp.src('./app/favicon.ico')
+    return gulp.src(paths.favicon)
         .pipe(gulp.dest('./dist/'));
 });
 
@@ -150,11 +150,11 @@ gulp.task('build', [
 // watches file system and triggers a build when a modification is detected
 gulp.task('watch', function () {
     return gulp.watch([
-            './app/index.html',
-            './app/**/*.css',
-            './app/**/*.html',
-            './app/**/*.js',
-            './app/*.js'],
+            './src/app/index.html',
+            './src/app/**/*.css',
+            './src/app/**/*.html',
+            './src/app/**/*.js',
+            './src/app/*.js'],
         ['build']);
 });
 

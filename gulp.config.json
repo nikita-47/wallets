@@ -1,10 +1,11 @@
 {
   "test": "./app/test/",
-  "html": "./app/**/*.html",
+  "html": "./src/app/**/*.html",
+  "index": "./src/app/index.html",
+  "favicon": "./app/favicon.ico",
   "vendorjs": [
     "./bower_components/jquery/dist/jquery.min.js",
     "./bower_components/angular/angular.min.js",
-    "./bower_components/angular-route/angular-route.min.js",
     "./bower_components/angular-ui-router/release/angular-ui-router.min.js",
     "./bower_components/moment/min/moment.min.js",
     "./bower_components/semantic-ui-calendar/dist/calendar.min.js",
@@ -14,15 +15,13 @@
     "./bower_components/semantic/dist/semantic.min.css",
     "./bower_components/semantic-ui-calendar/dist/calendar.min.css"
   ],
-  "css": "./app/styles/main.css",
+  "css": "./src/app/styles/main.css",
   "js": [
-    "./app/**/*module*.js",
-    "./app/**/*.js",
-    "!./app/services/**/*.js",
-    "!./app/controllers/**/*.js"
+    "./src/app/**/*module*.js",
+    "./src/app/**/*.js"
   ],
   "specs": [
-    "./app/test/specs/*.spec.js"
+    "./src/test/specs/*.spec.js"
   ],
   "assets": [
     "./bower_components/semantic/dist/themes/default/assets/**/*.*"
