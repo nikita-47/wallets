@@ -23,10 +23,33 @@
             activate();
         }
 
+        initRecharge();
+
         vm.submitUser = submitUser;
+        vm.submitRecharge = submitRecharge;
+
+        function submitRecharge() {
+            vm.isLoadingRecharge = true;
+            return dataservice.createRecharge($stateParams.id, vm.newRecharge)
+                .then(function (response) {
+                    vm.isLoadingRecharge = false;
+                    vm.user.balance = response.amount;
+                    initRecharge();
+                    if (!vm.user.wallet_currency) {
+                        activate();
+                    }
+                });
+        }
 
         function activate() {
             return getUser();
+        }
+
+        function initRecharge() {
+            vm.newRecharge = {
+                amount: '',
+                comment: ''
+            };
         }
 
         function getUser() {

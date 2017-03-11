@@ -16,6 +16,7 @@
             getOneUser: getOneUser,
             createUser: createUser,
             updateUser: updateUser,
+            createRecharge: createRecharge,
             ready: ready
         };
 
@@ -47,6 +48,16 @@
                 .then(createComplete);
 
             function createComplete(data, status, headers, config) {
+                return data.data;
+            }
+        }
+
+        //
+        function createRecharge(id, data) {
+            return $http.post(baseUrl + '/users/' + id + '/recharge', data)
+                .then(rechargeComplete);
+
+            function rechargeComplete(data, status, headers, config) {
                 return data.data;
             }
         }
