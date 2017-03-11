@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -19,24 +19,10 @@
                 config: {
                     templateUrl: 'app/users/users.html',
                     controller: 'Users',
-                    controllerAs: 'vm',
-                    title: 'dashboard',
-                    settings: {
-                        nav: 1,
-                        content: '<i class="fa fa-dashboard"></i> Users'
-                    }
+                    controllerAs: 'vm'
                 }
             }
         ];
-        // return [
-        //     {
-        //         url: '/users',
-        //         config: {
-        //             templateUrl: 'app/users/users.html',
-        //             controller: 'Users',
-        //             controllerAs: 'vm'
-        //         }
-        //     }
-        // ];
     }
+
 })();
