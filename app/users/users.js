@@ -26,7 +26,6 @@
 
         function openUser(userId) {
             var $state = $injector.get('$state');
-            console.log(userId);
             $state.go('detail', { id: userId });
         }
 

@@ -1,0 +1,101 @@
+<div class="ui container">
+    <div class="ui grid">
+        <div class="row">
+            <button
+                class="ui button"
+                ui-sref="detail({ id: vm.id })"
+            >Back to profile
+            </button>
+        </div>
+        <div class="row">
+            <div class="ui segment">
+                <div
+                    class="ui middle aligned selection divided list"
+                >
+                    <h3>Range</h3>
+                    <form class="ui form" ng-submit="vm.reloadTrans()">
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Start date</label>
+                                <div class="ui calendar" id="rangeStart">
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input
+                                            type="text"
+                                            value="{{ vm.params.datetimeFrom }}"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>End date</label>
+                                <div class="ui calendar" id="rangeEnd">
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input
+                                            type="text"
+                                            value="{{ vm.params.datetimeTo }}"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Type</label>
+                                <select
+                                    class="ui search selection dropdown"
+                                    ng-model="vm.params.transType"
+                                    ng-init="vm.params.transType = vm.params.transType || vm.types[0].value "
+                                    ng-options="type.value as type.name for type in vm.types">
+                                </select>
+                            </div>
+                        </div>
+                        <button class="ui button">Reload</button>
+                    </form>
+                    <table class="ui single striped line table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Operation ID</th>
+                            <th>Transaction ID</th>
+                            <th>Coupon ID</th>
+                            <th>Coupon Code</th>
+                            <th>Transaction Type</th>
+                            <th>Comment</th>
+                            <th>Amount</th>
+                            <th>Sum</th>
+                            <th>Currency</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="transaction in vm.transactions">
+                            <td>{{ transaction.dateFormated }}</td>
+                            <td>{{ transaction.operation_id }}</td>
+                            <td>{{ transaction.transaction_id }}</td>
+                            <td>{{ transaction.coupon_id }}</td>
+                            <td>{{ transaction.coupon_code }}</td>
+                            <td>{{ transaction.transaction_type }}</td>
+                            <td>{{ transaction.comment }}</td>
+                            <td>{{ transaction.amount }}</td>
+                            <td>{{ transaction.sum }}</td>
+                            <td>{{ transaction.currency }}</td>
+                            <td>{{ transaction.status }}</td>
+                        </tr>
+                    </table>
+                    <div class="ui active inverted dimmer"
+                         ng-if="vm.isLoading"
+                    >
+                        <div class="ui loader"></div>
+                    </div>
+                    <div
+                        ng-if="vm.transactions == 0"
+                        class="ui warning message">
+                        <div class="header">
+                            No transactions
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

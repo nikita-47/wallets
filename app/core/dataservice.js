@@ -17,10 +17,12 @@
             createUser: createUser,
             updateUser: updateUser,
             createRecharge: createRecharge,
+            getTransactions: getTransactions,
             ready: ready
         };
 
         return service;
+
         //
         function getUsers(params) {
             var paramsString = prepareParams(params);
@@ -53,6 +55,16 @@
         }
 
         //
+        function updateUser(id, data) {
+            return $http.put(baseUrl + '/users/' + id, data)
+                .then(updateComplete);
+
+            function updateComplete(data, status, headers, config) {
+                return data.data;
+            }
+        }
+
+        //
         function createRecharge(id, data) {
             return $http.post(baseUrl + '/users/' + id + '/recharge', data)
                 .then(rechargeComplete);
@@ -63,11 +75,13 @@
         }
 
         //
-        function updateUser(id, data) {
-            return $http.put(baseUrl + '/users/' + id, data)
-                .then(updateComplete);
+        function getTransactions(id, params) {
+            var paramsString = prepareParams(params);
+            var url = baseUrl + '/users/' + id + '/transactions' + paramsString;
+            return $http.get(url)
+                .then(getTransactionsComplete);
 
-            function updateComplete(data, status, headers, config) {
+            function getTransactionsComplete(data, status, headers, config) {
                 return data.data;
             }
         }

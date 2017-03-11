@@ -5,7 +5,8 @@
         'app.router',
         'app.core',
         'app.users',
-        'app.detail'
+        'app.detail',
+        'app.transactions'
     ]);
 
 })();

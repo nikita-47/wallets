@@ -54,7 +54,7 @@ gulp.task('favicon', function () {
 
 // copy semantic-ui assets
 gulp.task('build-assets', function () {
-    return gulp.src(['./app/bower_components/semantic/dist/themes/default/assets/**/*'])
+    return gulp.src(paths.assets)
         .pipe(gulp.dest('./dist/css/themes/default/assets/'));
 });
 
@@ -151,9 +151,7 @@ gulp.task('build', [
 gulp.task('watch', function () {
     return gulp.watch([
             './app/index.html',
-            './app/**/**/*.html',
             './app/**/*.css',
-            './app/**/**/*.js',
             './app/**/*.html',
             './app/**/*.js',
             './app/*.js'],
