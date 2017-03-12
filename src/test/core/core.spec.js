@@ -8,11 +8,13 @@ describe('Testing Dataservice', function() {
     var baseUrl;
     var userId = 'unit';
 
-    beforeEach(inject(function(_dataservice_, _$httpBackend_, $injector) {
+    beforeEach(inject(function(_dataservice_, _$httpBackend_, $injector, toastr) {
 
         dataservice = _dataservice_;
         $httpBackend = _$httpBackend_;
         baseUrl = $injector.get('baseUrl');
+
+        spyOn(toastr, 'error');
 
     }));
 
@@ -65,6 +67,17 @@ describe('Testing Dataservice', function() {
         expect($httpBackend.flush).not.toThrow();
 
     });
+
+
+    it('should catch an error', inject(function(toastr) {
+
+        var postUserUrl = baseUrl + '/users';
+        $httpBackend.expect('POST', postUserUrl).respond(500);
+        dataservice.createUser({ user_id: userId });
+        expect($httpBackend.flush).not.toThrow();
+        expect(toastr.error).toHaveBeenCalled();
+
+    }));
 
 
     it('should create recharge', function() {
