@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-    webserver = require('gulp-webserver'),
+    connect = require('gulp-connect');
     del = require('del'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
@@ -20,8 +20,8 @@ var gulp = require('gulp'),
  * Remove all files from the build folder
  * @return {Stream}
  */
-gulp.task('clean', function (cb) {
-    del(paths.build, cb);
+gulp.task('clean', function () {
+    return del.sync(paths.build);
 });
 
 
@@ -73,7 +73,7 @@ gulp.task('build-assets', function () {
  * Create $templateCache from the html templates
  * @return {Stream}
  */
-gulp.task('templatecache', function() {
+gulp.task('templatecache', function () {
     return gulp
         .src(paths.html)
         .pipe(plug.minifyHtml({
@@ -95,7 +95,7 @@ gulp.task('templatecache', function() {
 gulp.task('jshint', function () {
     var jshintrcFile = './.jshintrc';
     var source = [].concat(paths.js);
-    gulp.src(source)
+    return gulp.src(source)
         .pipe(jshint(jshintrcFile))
         .pipe(jshint.reporter('jshint-stylish'));
 });
@@ -107,7 +107,7 @@ gulp.task('jshint', function () {
  */
 gulp.task('build-js', ['jshint', 'templatecache'], function () {
     var source = [].concat(paths.js, paths.build + 'js/' + 'templates.js');
-    gulp.src(source)
+    return gulp.src(source)
         .pipe(sourcemaps.init())
         .pipe(concat('app.min.js'))
         .pipe(ngAnnotate())
@@ -121,11 +121,11 @@ gulp.task('build-js', ['jshint', 'templatecache'], function () {
  * Copy the Vendor JavaScript
  * @return {Stream}
  */
-gulp.task('vendor-js', function() {
+gulp.task('vendor-js', function () {
     return gulp.src(paths.vendorjs)
         .pipe(plug.concat('vendor.min.js'))
         .pipe(plug.uglify())
-        .pipe(gulp.dest(paths.build  + 'js/'));
+        .pipe(gulp.dest(paths.build + 'js/'));
 });
 
 
@@ -133,7 +133,7 @@ gulp.task('vendor-js', function() {
  * Minify and bundle the Vendor CSS
  * @return {Stream}
  */
-gulp.task('vendor-css', function() {
+gulp.task('vendor-css', function () {
     return gulp.src(paths.vendorcss)
         .pipe(plug.concat('vendor.min.css'))
         .pipe(cssmin())
@@ -147,16 +147,14 @@ gulp.task('vendor-css', function() {
  */
 gulp.task('build', [
         'clean',
-        'build-js',
         'bower',
+        'build-js',
         'build-index',
         'vendor-js',
         'vendor-css',
-        'build-assets',
-        'favicon'
-    ],
-    function () {
-    }
+        'favicon',
+        'build-assets'
+    ]
 );
 
 
@@ -174,12 +172,11 @@ gulp.task('watch', function () {
  * @return {Stream}
  */
 gulp.task('server', function () {
-    gulp.src('dist')
-        .pipe(webserver({
-            livereload: false,
-            directoryListing: true,
-            open: "http://localhost:8000/index.html#/users"
-        }));
+    return connect.server({
+        root: paths.build,
+        port: 8888,
+        fallback: 'index.html'
+    });
 });
 
 

@@ -24,7 +24,7 @@
                 // wait until data has been loaded
                 $timeout(function () {
                     $scope.$apply(function () {
-                        var isTrueSet = (value == 'true');
+                        var isTrueSet = (value === 'true');
                         element.toggleClass('active', isTrueSet);
                     });
                 });
