@@ -80,6 +80,24 @@ describe('Testing Dataservice', function() {
     }));
 
 
+    it('should catch an error with status code', inject(function(toastr) {
+
+        var errorMsg = 'error';
+
+        var errorResponse = {
+            http_status_code: 500,
+            message: errorMsg
+        };
+
+        var postUserUrl = baseUrl + '/users';
+        $httpBackend.expect('POST', postUserUrl).respond(200, errorResponse);
+        dataservice.createUser({ user_id: userId });
+        expect($httpBackend.flush).not.toThrow();
+        expect(toastr.error).toHaveBeenCalledWith(errorMsg);
+
+    }));
+
+
     it('should create recharge', function() {
 
         var postRechargeUrl = baseUrl + '/users/' + userId + '/recharge';

@@ -69,6 +69,12 @@
                 .catch(exceptionCatcher);
 
             function createComplete(data) {
+                if (data.data) {
+                    /*jshint camelcase: false */
+                    if (data.data.http_status_code) {
+                        toastr.error(data.data.message);
+                    }
+                }
                 return data.data;
             }
         }
