@@ -12,7 +12,8 @@
   "homepage": "https://github.com/NikitaBonachev/wallets",
   "private": true,
   "dependencies": {
-    "semantic": "semantic-ui#^2.2.9",
+    "semantic":
+    "semantic-ui#^2.2.9",
     "semantic-ui-calendar": "^0.0.7",
     "moment": "^2.17.1",
     "angular": "^1.6.3",
