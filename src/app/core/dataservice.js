@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -23,7 +23,12 @@
 
         return service;
 
-        //
+
+        /**
+         * Get all users
+         * @param params ({ offset, limit })
+         * @return {promise}
+         */
         function getUsers(params) {
             var paramsString = prepareParams(params);
             return $http.get(baseUrl + '/users' + paramsString)
@@ -34,7 +39,12 @@
             }
         }
 
-        //
+
+        /**
+         * Get one users
+         * @param id user Id
+         * @return {promise}
+         */
         function getOneUser(id) {
             return $http.get(baseUrl + '/users/' + id)
                 .then(getOneUserComplete);
@@ -44,7 +54,12 @@
             }
         }
 
-        //
+
+        /**
+         * Create new user
+         * @param data
+         * @return {promise}
+         */
         function createUser(data) {
             return $http.post(baseUrl + '/users', data)
                 .then(createComplete);
@@ -54,7 +69,13 @@
             }
         }
 
-        //
+
+        /**
+         * Update user info
+         * @param id
+         * @param data
+         * @return {promise}
+         */
         function updateUser(id, data) {
             return $http.put(baseUrl + '/users/' + id, data)
                 .then(updateComplete);
@@ -64,7 +85,12 @@
             }
         }
 
-        //
+        /**
+         * Create Recharge
+         * @param id user
+         * @param data ({ amount, comment })
+         * @return {promise}
+         */
         function createRecharge(id, data) {
             return $http.post(baseUrl + '/users/' + id + '/recharge', data)
                 .then(rechargeComplete);
@@ -74,7 +100,13 @@
             }
         }
 
-        //
+
+        /**
+         * Get all transaction for user
+         * @param id user
+         * @param params ({ datetime_from, datetime_to, transaction_type })
+         * @return {promise}
+         */
         function getTransactions(id, params) {
             var paramsString = prepareParams(params);
             var url = baseUrl + '/users/' + id + '/transactions' + paramsString;
@@ -86,7 +118,12 @@
             }
         }
 
-        //
+
+        /**
+         * Prepare params for GET
+         * @param params
+         * @return {string}
+         */
         function prepareParams(params) {
             var paramsString;
             if (params) {
@@ -102,12 +139,18 @@
         }
 
 
-        //
+        /**
+         * Check ready
+         * @param nextPromises
+         * @return {promise}
+         */
         function ready(nextPromises) {
             var readyPromise = primePromise || prime();
 
             return readyPromise
-                .then(function() { return $q.all(nextPromises); });
+                .then(function () {
+                    return $q.all(nextPromises);
+                });
             //    .catch(exception.catcher('"ready" function failed'));
         }
 

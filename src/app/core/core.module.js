@@ -5,4 +5,5 @@
         'ui.router',
         'app.router'
     ]);
+
 })();
