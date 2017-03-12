@@ -78,7 +78,7 @@
             }
 
             if (vm.errors.length > 0) {
-                return;
+                return false;
             }
 
             vm.isLoading = true;

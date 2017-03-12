@@ -66,8 +66,8 @@ describe('Testing Dataservice', function() {
         var postRechargeUrl = baseUrl + '/users/' + userId + '/recharge';
 
         var dataRecharge = {
-            amount: 1,
-            comment: 1
+            amount: 0,
+            comment: 'test'
         };
 
         $httpBackend.expect('POST', postRechargeUrl).respond(200);
