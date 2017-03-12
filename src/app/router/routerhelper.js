@@ -35,8 +35,7 @@
         var $urlRouterProvider = statehelperConfig.config.$urlRouterProvider;
 
         var service = {
-            configureStates: configureStates,
-            getStates: getStates
+            configureStates: configureStates
         };
 
         init();
@@ -64,16 +63,6 @@
                     $state.go('user-list');
                 }
             );
-        }
-
-        function getStates() {
-            for (var prop in $state.states) {
-                if ($state.states.hasOwnProperty(prop)) {
-                    var state = $state.states[prop];
-                    states.push(state);
-                }
-            }
-            return states;
         }
 
     }
