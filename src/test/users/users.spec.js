@@ -1,12 +1,13 @@
 'use strict';
 
 describe("Testing Users", function () {
-    var users;
+
     beforeEach(module('app.users'));
 
     var Ctrl;
-    beforeEach(inject(function($controller) {
+    beforeEach(inject(function($controller, $state) {
         Ctrl = $controller('Users');
+        spyOn($state, 'go');
     }));
 
     it("should have a empty user list", function() {
@@ -32,5 +33,11 @@ describe("Testing Users", function () {
         Ctrl.selectPerPage(15);
         expect(Ctrl.pageParams.limit).toEqual(15);
     });
+
+    it("should open user detail", inject(function($state) {
+        var userId = 0;
+        Ctrl.openUser(userId);
+        expect($state.go).toHaveBeenCalledWith('detail', {id: userId});
+    }));
 
 });
