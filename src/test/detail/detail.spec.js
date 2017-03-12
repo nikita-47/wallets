@@ -71,6 +71,18 @@ describe("Testing Detail", function () {
     }));
 
 
+    it("recharge with errors", function () {
+
+        Ctrl.newRecharge = {
+            amount: 0,
+            comment: ''
+        };
+        Ctrl.submitRecharge();
+        expect(Ctrl.errorsRecharge.length === 2).toBe(true);
+
+    });
+
+
     it("should create recharge without currency", inject(function ($timeout) {
 
         var getUserUrl = baseUrl + '/users/' + userId;
