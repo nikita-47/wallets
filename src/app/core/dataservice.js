@@ -115,6 +115,8 @@
                 isPrimed = true;
             }
         }
+
+
         //
         function ready(nextPromises) {
             var readyPromise = primePromise || prime();
