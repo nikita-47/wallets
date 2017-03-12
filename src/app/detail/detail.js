@@ -105,8 +105,10 @@
             if (!vm.id) {
                 return dataservice.createUser(user)
                     .then(function (resp) {
-                        if (resp.http_status_code) {
-                            toastr.error(resp.message);
+                        if (resp) {
+                            if (resp.http_status_code) {
+                                toastr.error(resp.message);
+                            }
                         } else {
                             $state.go('detail', {id: user.user_id});
                         }

@@ -46,24 +46,22 @@ describe("Testing Detail", function () {
     it("should create recharge", inject(function ($timeout) {
 
         var getUserUrl = baseUrl + '/users/' + userId;
-
         $httpBackend.expect('GET', getUserUrl).respond({
             user_id: userId,
             balance: 0,
             wallet_currency: 'USD'
         });
-
         $timeout.flush();
         $timeout.verifyNoPendingTasks();
         expect($httpBackend.flush).not.toThrow();
 
         Ctrl.newRecharge = {
-            amount: 0,
+            amount: 1,
             comment: 'test'
         };
 
         var postRechargeUrl = baseUrl + '/users/' + userId + '/recharge';
-        $httpBackend.expect('POST', postRechargeUrl).respond({ amount: 0 });
+        $httpBackend.expect('POST', postRechargeUrl).respond({ amount: 1 });
         Ctrl.submitRecharge();
         $timeout.flush();
         $timeout.verifyNoPendingTasks();
@@ -76,23 +74,21 @@ describe("Testing Detail", function () {
     it("should create recharge without currency", inject(function ($timeout) {
 
         var getUserUrl = baseUrl + '/users/' + userId;
-
         $httpBackend.expect('GET', getUserUrl).respond({
             user_id: userId,
-            balance: 0
+            balance: 0,
         });
-
         $timeout.flush();
         $timeout.verifyNoPendingTasks();
         expect($httpBackend.flush).not.toThrow();
 
         Ctrl.newRecharge = {
-            amount: 0,
+            amount: 1,
             comment: 'test'
         };
 
         var postRechargeUrl = baseUrl + '/users/' + userId + '/recharge';
-        $httpBackend.expect('POST', postRechargeUrl).respond({ amount: 0 });
+        $httpBackend.expect('POST', postRechargeUrl).respond({ amount: 1 });
         $httpBackend.expect('GET', getUserUrl).respond(200);
         Ctrl.submitRecharge();
         $timeout.flush();
@@ -134,7 +130,7 @@ describe("Testing Detail", function () {
         };
 
         var postUserUrl = baseUrl + '/users';
-        $httpBackend.expect('POST', postUserUrl).respond(200);
+        $httpBackend.expect('POST', postUserUrl).respond();
         Ctrl.submitUser(user);
         expect($httpBackend.flush).not.toThrow();
 
