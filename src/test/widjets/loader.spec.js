@@ -24,11 +24,15 @@ describe("loader", function () {
         expect(element.hasClass('active')).toBe(false);
     });
 
-    it("shouldn't have active class", function () {
+    it("shouldn't have active class", inject(function($timeout) {
         scope.vm = {
             isLoading: false,
         };
+
+        $timeout.flush();
+        $timeout.verifyNoPendingTasks();
+
         expect(element.hasClass('active')).toBe(false);
-    });
+    }));
 
 });

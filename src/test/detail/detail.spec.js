@@ -20,5 +20,4 @@ describe("Testing Detail", function () {
         expect(Ctrl.id).toEqual(testId);
     });
 
-
 });
