@@ -9,11 +9,13 @@
     "./bower_components/angular-ui-router/release/angular-ui-router.min.js",
     "./bower_components/moment/min/moment.min.js",
     "./bower_components/semantic-ui-calendar/dist/calendar.min.js",
+    "./bower_components/toastr/toastr.min.js",
     "./bower_components/semantic/dist/semantic.min.js"
   ],
   "vendorcss": [
     "./bower_components/semantic/dist/semantic.min.css",
-    "./bower_components/semantic-ui-calendar/dist/calendar.min.css"
+    "./bower_components/semantic-ui-calendar/dist/calendar.min.css",
+    "./bower_components/toastr/toastr.min.css"
   ],
   "maincss": "./src/app/styles/main.css",
   "js": [

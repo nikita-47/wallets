@@ -8,6 +8,7 @@
     /* @ngInject */
     function dataservice($http, $q, $injector) {
         var baseUrl = $injector.get('baseUrl');
+        var toastr = $injector.get('toastr');
         var isPrimed = false;
         var primePromise;
 
@@ -27,14 +28,15 @@
         /**
          * Get all users
          * @param params ({ offset, limit })
-         * @return {promise}
+         * @return {promise | object}
          */
         function getUsers(params) {
             var paramsString = prepareParams(params);
             return $http.get(baseUrl + '/users' + paramsString)
-                .then(getUsersComplete);
+                .then(getUsersComplete)
+                .catch(exceptionCatcher);
 
-            function getUsersComplete(data, status, headers, config) {
+            function getUsersComplete(data) {
                 return data.data;
             }
         }
@@ -43,13 +45,14 @@
         /**
          * Get one users
          * @param id user Id
-         * @return {promise}
+         * @return {promise | object}
          */
         function getOneUser(id) {
             return $http.get(baseUrl + '/users/' + id)
-                .then(getOneUserComplete);
+                .then(getOneUserComplete)
+                .catch(exceptionCatcher);
 
-            function getOneUserComplete(data, status, headers, config) {
+            function getOneUserComplete(data) {
                 return data.data;
             }
         }
@@ -58,13 +61,14 @@
         /**
          * Create new user
          * @param data
-         * @return {promise}
+         * @return {promise | object}
          */
         function createUser(data) {
             return $http.post(baseUrl + '/users', data)
-                .then(createComplete);
+                .then(createComplete)
+                .catch(exceptionCatcher);
 
-            function createComplete(data, status, headers, config) {
+            function createComplete(data) {
                 return data.data;
             }
         }
@@ -74,13 +78,14 @@
          * Update user info
          * @param id
          * @param data
-         * @return {promise}
+         * @return {promise | object}
          */
         function updateUser(id, data) {
             return $http.put(baseUrl + '/users/' + id, data)
-                .then(updateComplete);
+                .then(updateComplete)
+                .catch(exceptionCatcher);
 
-            function updateComplete(data, status, headers, config) {
+            function updateComplete(data) {
                 return data.data;
             }
         }
@@ -89,13 +94,14 @@
          * Create Recharge
          * @param id user
          * @param data ({ amount, comment })
-         * @return {promise}
+         * @return {promise | object}
          */
         function createRecharge(id, data) {
             return $http.post(baseUrl + '/users/' + id + '/recharge', data)
-                .then(rechargeComplete);
+                .then(rechargeComplete)
+                .catch(exceptionCatcher);
 
-            function rechargeComplete(data, status, headers, config) {
+            function rechargeComplete(data) {
                 return data.data;
             }
         }
@@ -105,15 +111,16 @@
          * Get all transaction for user
          * @param id user
          * @param params ({ datetime_from, datetime_to, transaction_type })
-         * @return {promise}
+         * @return {promise | object}
          */
         function getTransactions(id, params) {
             var paramsString = prepareParams(params);
             var url = baseUrl + '/users/' + id + '/transactions' + paramsString;
             return $http.get(url)
-                .then(getTransactionsComplete);
+                .then(getTransactionsComplete)
+                .catch(exceptionCatcher);
 
-            function getTransactionsComplete(data, status, headers, config) {
+            function getTransactionsComplete(data) {
                 return data.data;
             }
         }
@@ -150,8 +157,8 @@
             return readyPromise
                 .then(function () {
                     return $q.all(nextPromises);
-                });
-            //    .catch(exception.catcher('"ready" function failed'));
+                })
+                .catch(exceptionCatcher);
         }
 
 
@@ -162,6 +169,11 @@
             function success() {
                 isPrimed = true;
             }
+        }
+
+
+        function exceptionCatcher() {
+            toastr.error('Sorry, but something went wrong');
         }
 
     }

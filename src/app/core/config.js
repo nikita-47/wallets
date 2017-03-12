@@ -3,6 +3,14 @@
 
     var core = angular.module('app.core');
 
+    core.config(toastrConfig);
+
+    /* @ngInject */
+    function toastrConfig(toastr) {
+        toastr.options.timeOut = 4000;
+        toastr.options.positionClass = 'toast-top-right';
+    }
+
     core.value('config', {});
     core.config(configure);
 

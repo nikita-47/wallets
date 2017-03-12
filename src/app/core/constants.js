@@ -7,6 +7,7 @@
         .constant('baseUrl', 'https://livedemo.xsolla.com/fe/test-task/baev')
         .constant('transDateTimeFormat', 'YYYY-MM-DD HH:mm')
         .constant('moment', moment)
+        .constant('toastr', toastr)
         .constant('transTypes', [
             {
                 name: 'No selection'

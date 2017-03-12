@@ -22,6 +22,7 @@ module.exports = function (config) {
             'bower_components/moment/moment.js',
             'bower_components/semantic-ui-calendar/dist/calendar.min.js',
             'bower_components/semantic/dist/semantic.min.js',
+            'bower_components/toastr/toastr.min.js',
 
             'src/app/app.module.js',
             'src/app/**/*.module.js',
