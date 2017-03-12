@@ -15,7 +15,7 @@
     "./bower_components/semantic/dist/semantic.min.css",
     "./bower_components/semantic-ui-calendar/dist/calendar.min.css"
   ],
-  "css": "./src/app/styles/main.css",
+  "maincss": "./src/app/styles/main.css",
   "js": [
     "./src/app/**/*module*.js",
     "./src/app/**/*.js"

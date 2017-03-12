@@ -142,6 +142,18 @@ gulp.task('vendor-css', function () {
 
 
 /**
+ * Minify and bundle the main CSS
+ * @return {Stream}
+ */
+gulp.task('main-css', function () {
+    return gulp.src(paths.maincss)
+        .pipe(plug.concat('main.min.css'))
+        .pipe(cssmin())
+        .pipe(gulp.dest(paths.build + 'css/'));
+});
+
+
+/**
  * Full build
  * @return {Stream}
  */
@@ -152,6 +164,7 @@ gulp.task('build', [
         'build-index',
         'vendor-js',
         'vendor-css',
+        'main-css',
         'favicon',
         'build-assets'
     ]
