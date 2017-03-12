@@ -22,8 +22,13 @@
 
         function activate() {
             vm.params = {
-                datetimeFrom: moment().subtract(7, 'days').startOf('day').utc(false),
-                datetimeTo: moment().endOf('day').utc(false),
+                datetimeFrom: moment()
+                    .subtract(7, 'days')
+                    .utc(false)
+                    .startOf('day'),
+                datetimeTo: moment()
+                    .utc(false)
+                    .endOf('day'),
                 transType: null
             };
 
@@ -66,8 +71,8 @@
                     endCalendar: rangeEnd,
                     onChange: function (date) {
                         vm.params.datetimeFrom = moment(date)
-                            .startOf('day')
-                            .utc(false);
+                            .utc(true)
+                            .startOf('day');
                     }
                 });
 
@@ -78,8 +83,8 @@
                     startCalendar: rangeStart,
                     onChange: function (date) {
                         vm.params.datetimeTo = moment(date)
-                            .endOf('day')
-                            .utc(false);
+                            .utc(true)
+                            .endOf('day');
                     }
                 });
 

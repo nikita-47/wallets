@@ -175,7 +175,7 @@ gulp.task('server', function () {
     return connect.server({
         root: paths.build,
         port: 8888,
-        fallback: 'index.html'
+        livereload: false
     });
 });
 
