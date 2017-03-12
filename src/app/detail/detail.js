@@ -18,15 +18,16 @@
             email: ''
         };
 
-        if ($stateParams.id) {
+
+        if (typeof $stateParams.id !== 'undefined') {
             vm.id = $stateParams.id;
             activate();
         }
 
-        initRecharge();
-
         vm.submitUser = submitUser;
         vm.submitRecharge = submitRecharge;
+
+        initRecharge();
 
         function submitRecharge() {
             vm.isLoadingRecharge = true;
