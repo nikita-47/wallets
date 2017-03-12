@@ -6,7 +6,8 @@
         'app.core',
         'app.users',
         'app.detail',
-        'app.transactions'
+        'app.transactions',
+        'app.widgets'
     ]);
 
 })();

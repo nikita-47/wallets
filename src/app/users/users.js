@@ -49,7 +49,6 @@
             return dataservice.getUsers(vm.pageParams)
                 .then(function (response) {
                     vm.users = response.data;
-                    vm.isLoading = false;
 
                     var totalPages = Math.ceil(
                         response.recordsTotal / vm.pageParams.limit
@@ -61,6 +60,7 @@
                         totalPages,
                         currentPage
                     );
+                    vm.isLoading = false;
                     return vm.users;
                 });
         }

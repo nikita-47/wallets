@@ -82,11 +82,7 @@
                             <td>{{ transaction.status }}</td>
                         </tr>
                     </table>
-                    <div class="ui active inverted dimmer"
-                         ng-if="vm.isLoading"
-                    >
-                        <div class="ui loader"></div>
-                    </div>
+                    <loader loading="{{ vm.isLoading }}"></loader>
                     <div
                         ng-if="vm.transactions == 0"
                         class="ui warning message">

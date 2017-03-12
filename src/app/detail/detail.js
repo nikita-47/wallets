@@ -6,7 +6,7 @@
         .controller('Detail', Detail);
 
     /* @ngInject */
-    function Detail(dataservice, $stateParams, $state) {
+    function Detail(dataservice, $stateParams, $state, $injector) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -18,6 +18,7 @@
             email: ''
         };
 
+        vm.isLoading = false;
 
         if (typeof $stateParams.id !== 'undefined') {
             vm.id = $stateParams.id;
@@ -33,12 +34,12 @@
             vm.isLoadingRecharge = true;
             return dataservice.createRecharge($stateParams.id, vm.newRecharge)
                 .then(function (response) {
-                    vm.isLoadingRecharge = false;
                     vm.user.balance = response.amount;
                     initRecharge();
                     if (!vm.user.wallet_currency) {
                         activate();
                     }
+                    vm.isLoadingRecharge = false;
                 });
         }
 
@@ -57,13 +58,16 @@
             vm.isLoading = true;
             return dataservice.getOneUser($stateParams.id)
                 .then(function (response) {
-                    vm.isLoading = false;
                     vm.user = response;
+                    vm.isLoading = false;
                 });
         }
 
         function submitUser(user) {
             vm.errors = [];
+
+            var emailRegexp = $injector.get('emailRegexp');
+
             if (user.email.length > 0) {
                 if (!emailRegexp.test(user.email)) {
                     vm.errors.push({message: 'Invalid email'});

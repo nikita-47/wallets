@@ -80,11 +80,7 @@
                             ng-disabled="vm.isLoading">Create
                         </button>
                     </form>
-                    <div class="ui active inverted dimmer"
-                         ng-if="vm.isLoading"
-                    >
-                        <div class="ui loader"></div>
-                    </div>
+                    <loader loading="{{ vm.isLoading }}"></loader>
                     <div
                         ng-repeat="error in vm.errors"
                         class="ui negative message">
@@ -144,11 +140,7 @@
                                     ui-sref="transactions({ id: vm.user.user_id })"
                                 >Show transactions
                                 </button>
-                                <div class="ui active inverted dimmer"
-                                     ng-if="vm.isLoading"
-                                >
-                                    <div class="ui loader"></div>
-                                </div>
+                                <loader loading="{{ vm.isLoading }}"></loader>
                             </div>
 
                         </div>
@@ -181,11 +173,7 @@
                                         ng-disabled="vm.isLoadingRecharge"
                                     >New recharge
                                     </button>
-                                    <div class="ui active inverted dimmer"
-                                         ng-if="vm.isLoadingRecharge"
-                                    >
-                                        <div class="ui loader"></div>
-                                    </div>
+                                    <loader loading="{{ vm.isLoadingRecharge }}"></loader>
                                 </form>
                                 <div
                                     ng-repeat="error in vm.errors"

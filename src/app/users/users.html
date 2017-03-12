@@ -50,11 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui active inverted dimmer"
-             ng-if="vm.isLoading"
-        >
-            <div class="ui loader"></div>
-        </div>
+        <loader loading="{{ vm.isLoading }}"></loader>
     </div>
     <div
         class="ui pagination menu"
