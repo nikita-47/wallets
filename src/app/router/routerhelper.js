@@ -56,13 +56,6 @@
 
         function init() {
             handleStateChangeError();
-            handleStateChangeSuccess();
-        }
-
-        function handleStateChangeSuccess() {
-            $rootScope.$on('$stateChangeSuccess', function () {
-                $rootScope.currentUrl = $location.url();
-            });
         }
 
         function handleStateChangeError() {
