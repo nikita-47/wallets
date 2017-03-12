@@ -68,4 +68,21 @@ describe("Testing Transactions", function () {
 
     }));
 
+
+    it("should change start date", inject(function (moment) {
+        var dateStart = 'Sat Mar 04 2017 00:00:00 GMT+0500 (+05)';
+        Ctrl.changeStartDate(dateStart);
+        var formatted = moment(dateStart).utc(true).startOf('day');
+        expect(formatted.format()).toEqual(Ctrl.params.datetimeFrom.format());
+    }));
+
+
+    it("should change end date", inject(function (moment) {
+        var dateEnd = 'Sun Mar 12 2017 00:00:00 GMT+0500 (+05)';
+        Ctrl.changeEndDate(dateEnd);
+        var formatted = moment(dateEnd).utc(true).endOf('day');
+        expect(formatted.format()).toEqual(Ctrl.params.datetimeTo.format());
+    }));
+
+
 });

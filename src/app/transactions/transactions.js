@@ -13,6 +13,9 @@
 
         vm.id = $stateParams.id;
         vm.reloadTrans = reloadTrans;
+        vm.changeStartDate = changeStartDate;
+        vm.changeEndDate = changeEndDate;
+
         activate();
 
         // Click on refresh button
@@ -54,11 +57,7 @@
                 monthFirst: false,
                 firstDayOfWeek: 1,
                 endCalendar: rangeEnd,
-                onChange: function (date) {
-                    vm.params.datetimeFrom = moment(date)
-                        .utc(true)
-                        .startOf('day');
-                }
+                onChange: vm.changeStartDate
             });
 
             rangeEnd.calendar({
@@ -66,12 +65,21 @@
                 monthFirst: false,
                 firstDayOfWeek: 1,
                 startCalendar: rangeStart,
-                onChange: function (date) {
-                    vm.params.datetimeTo = moment(date)
-                        .utc(true)
-                        .endOf('day');
-                }
+                onChange: vm.changeEndDate
             });
+        }
+
+        function changeStartDate(date) {
+            vm.params.datetimeFrom = moment(date)
+                .utc(true)
+                .startOf('day');
+        }
+
+
+        function changeEndDate(date) {
+            vm.params.datetimeTo = moment(date)
+                .utc(true)
+                .endOf('day');
         }
 
         // Start loading transactions
