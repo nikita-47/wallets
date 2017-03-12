@@ -58,41 +58,42 @@
                 }
             ];
 
-            // Initialize range picker
             angular.element($document).ready(function () {
-
-                var rangeStart = $('#rangeStart');
-                var rangeEnd = $('#rangeEnd');
-
-                rangeStart.calendar({
-                    type: 'date',
-                    monthFirst: false,
-                    firstDayOfWeek: 1,
-                    endCalendar: rangeEnd,
-                    onChange: function (date) {
-                        vm.params.datetimeFrom = moment(date)
-                            .utc(true)
-                            .startOf('day');
-                    }
-                });
-
-                rangeEnd.calendar({
-                    type: 'date',
-                    monthFirst: false,
-                    firstDayOfWeek: 1,
-                    startCalendar: rangeStart,
-                    onChange: function (date) {
-                        vm.params.datetimeTo = moment(date)
-                            .utc(true)
-                            .endOf('day');
-                    }
-                });
-
+                initRangePicker();
                 $('.dropdown').dropdown();
-
             });
 
             loadTransactions();
+        }
+
+
+        function initRangePicker() {
+            var rangeStart = $('#rangeStart');
+            var rangeEnd = $('#rangeEnd');
+
+            rangeStart.calendar({
+                type: 'date',
+                monthFirst: false,
+                firstDayOfWeek: 1,
+                endCalendar: rangeEnd,
+                onChange: function (date) {
+                    vm.params.datetimeFrom = moment(date)
+                        .utc(true)
+                        .startOf('day');
+                }
+            });
+
+            rangeEnd.calendar({
+                type: 'date',
+                monthFirst: false,
+                firstDayOfWeek: 1,
+                startCalendar: rangeStart,
+                onChange: function (date) {
+                    vm.params.datetimeTo = moment(date)
+                        .utc(true)
+                        .endOf('day');
+                }
+            });
         }
 
         // Start loading transactions

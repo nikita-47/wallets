@@ -22,7 +22,7 @@ describe("Testing Transactions", function () {
     }));
 
 
-    it("should init detail with id 0", function () {
+    it("should init trans with id 0", function () {
         expect(Ctrl.id).toEqual(userId);
     });
 
