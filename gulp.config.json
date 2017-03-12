@@ -20,11 +20,19 @@
     "./src/app/**/*module*.js",
     "./src/app/**/*.js"
   ],
+  "watch": [
+    "./src/app/index.html",
+    "./src/app/**/*.css",
+    "./src/app/**/*.html",
+    "./src/app/**/*.js",
+    "./src/app/*.js"
+  ],
   "specs": [
     "./src/test/specs/*.spec.js"
   ],
   "assets": [
     "./bower_components/semantic/dist/themes/default/assets/**/*.*"
   ],
+  "assetsdist":  "./dist/css/themes/default/assets/",
   "build": "./dist/"
 }

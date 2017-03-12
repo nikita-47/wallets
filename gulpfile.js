@@ -10,11 +10,10 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     rev = require('gulp-rev'),
     htmlmin = require('gulp-htmlmin'),
-    templateCache = require('gulp-angular-templatecache'),
     ghPages = require('gulp-gh-pages'),
-    cssmin = require('gulp-cssmin');
-var plug = require('gulp-load-plugins')();
-var paths = require('./gulp.config.json');
+    cssmin = require('gulp-cssmin'),
+    plug = require('gulp-load-plugins')(),
+    paths = require('./gulp.config.json');
 
 
 /**
@@ -37,25 +36,36 @@ gulp.task('bower', function () {
 });
 
 
-// build from index file
+/**
+ * Build index file
+ * @return {Stream}
+ */
 gulp.task('build-index', function () {
     return gulp.src(paths.index)
         .pipe(usemin())
-        .pipe(gulp.dest('./dist/'));
+        .pipe(usemin({
+            html: [htmlmin({collapseWhitespace: true})]
+        }))
+        .pipe(gulp.dest(paths.build));
 });
 
 
-// copy favicon
+/**
+ * Copy favicon
+ * @return {Stream}
+ */
 gulp.task('favicon', function () {
     return gulp.src(paths.favicon)
-        .pipe(gulp.dest('./dist/'));
+        .pipe(gulp.dest(paths.build));
 });
 
-
-// copy semantic-ui assets
+/**
+ * Copy semantic-ui assets
+ * @return {Stream}
+ */
 gulp.task('build-assets', function () {
     return gulp.src(paths.assets)
-        .pipe(gulp.dest('./dist/css/themes/default/assets/'));
+        .pipe(gulp.dest(paths.assetsdist));
 });
 
 
@@ -131,7 +141,10 @@ gulp.task('vendor-css', function() {
 });
 
 
-// full build
+/**
+ * Full build
+ * @return {Stream}
+ */
 gulp.task('build', [
         'clean',
         'build-js',
@@ -147,19 +160,19 @@ gulp.task('build', [
 );
 
 
-// watches file system and triggers a build when a modification is detected
+/**
+ * Watches file system and triggers a build when a modification is detected
+ * @return {Stream}
+ */
 gulp.task('watch', function () {
-    return gulp.watch([
-            './src/app/index.html',
-            './src/app/**/*.css',
-            './src/app/**/*.html',
-            './src/app/**/*.js',
-            './src/app/*.js'],
-        ['build']);
+    return gulp.watch(paths.watch, ['build']);
 });
 
 
-// launches a web server that serves files in the current directory
+/**
+ * Start local server
+ * @return {Stream}
+ */
 gulp.task('server', function () {
     gulp.src('dist')
         .pipe(webserver({
@@ -170,16 +183,25 @@ gulp.task('server', function () {
 });
 
 
-// Deploy to gh-pages
+/**
+ * Deploy on gh-pages
+ * @return {Stream}
+ */
 gulp.task('deploy', function () {
-    return gulp.src('./dist/**/*')
+    return gulp.src(paths.build + '**/*')
         .pipe(ghPages());
 });
 
 
-// launch a build upon modification and publish it to a running server
+/**
+ * launch a build upon modification and publish it to a running server
+ * @return {Stream}
+ */
 gulp.task('dev', ['build', 'watch', 'server']);
 
 
-// installs and builds everything
+/**
+ * Just build
+ * @return {Stream}
+ */
 gulp.task('default', ['build']);
