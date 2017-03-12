@@ -138,7 +138,7 @@ describe("Testing Detail", function () {
 
     }));
 
-    it("should update user", inject(function ($timeout, $state) {
+    it("should update user", inject(function ($timeout) {
 
         var getUserUrl = baseUrl + '/users/' + userId;
 
