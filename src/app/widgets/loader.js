@@ -9,7 +9,8 @@
     function loader($timeout) {
         var directive = {
             restrict: 'EA',
-            templateUrl: 'src/app/widgets/loader.html',
+            template: '<div class="ui inverted dimmer">' +
+            '<div class="ui loader"></div></div>',
             replace: true,
             scope: {
                 loading: '@'
