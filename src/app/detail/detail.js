@@ -9,6 +9,7 @@
     function Detail(dataservice, $stateParams, $state, $injector) {
         /*jshint validthis: true */
         var vm = this;
+        var toastr = $injector.get('toastr');
 
         /*jshint camelcase: false */
         vm.user = {
@@ -31,7 +32,22 @@
         initRecharge();
 
         function submitRecharge() {
+            vm.errorsRecharge = [];
+
+            if (!vm.newRecharge.amount) {
+                vm.errorsRecharge.push({message: 'Amount is required!'});
+            }
+
+            if (!vm.newRecharge.comment) {
+                vm.errorsRecharge.push({message: 'Comment is required!'});
+            }
+
+            if (vm.errorsRecharge.length > 0) {
+                return false;
+            }
+
             vm.isLoadingRecharge = true;
+
             return dataservice.createRecharge($stateParams.id, vm.newRecharge)
                 .then(function (response) {
                     vm.user.balance = response.amount;
@@ -39,6 +55,8 @@
                     if (!vm.user.wallet_currency) {
                         activate();
                     }
+                })
+                .finally(function () {
                     vm.isLoadingRecharge = false;
                 });
         }
@@ -59,6 +77,8 @@
             return dataservice.getOneUser($stateParams.id)
                 .then(function (response) {
                     vm.user = response;
+                })
+                .finally(function () {
                     vm.isLoading = false;
                 });
         }
@@ -84,13 +104,19 @@
             vm.isLoading = true;
             if (!vm.id) {
                 return dataservice.createUser(user)
-                    .then(function () {
+                    .then(function (resp) {
+                        if (resp.http_status_code) {
+                            toastr.error(resp.message);
+                        } else {
+                            $state.go('detail', {id: user.user_id});
+                        }
+                    })
+                    .finally(function () {
                         vm.isLoading = false;
-                        $state.go('detail', {id: user.user_id});
                     });
             } else {
                 return dataservice.updateUser(user.user_id, user)
-                    .then(function () {
+                    .finally(function () {
                         vm.isLoading = false;
                     });
             }

@@ -95,7 +95,6 @@
             dataservice.getTransactions(vm.id, params)
                 .then(
                     function (response) {
-                        vm.isLoading = false;
                         var transList = response;
                         if (transList.length) {
                             vm.transactions = transList.map(function (trans) {
@@ -108,7 +107,10 @@
                             vm.transactions = [];
                         }
                     }
-                );
+                )
+                .finally(function () {
+                    vm.isLoading = false;
+                });
 
         }
 

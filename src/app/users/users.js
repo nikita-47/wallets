@@ -60,8 +60,11 @@
                         totalPages,
                         currentPage
                     );
-                    vm.isLoading = false;
+
                     return vm.users;
+                })
+                .finally(function () {
+                    vm.isLoading = false;
                 });
         }
 
