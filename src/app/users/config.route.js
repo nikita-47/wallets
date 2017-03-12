@@ -17,12 +17,13 @@
                 state: 'user-list',
                 config: {
                     url: '/users',
-                    templateUrl: 'app/users/users.html',
+                    templateUrl: 'src/app/users/users.html',
                     controller: 'Users',
                     controllerAs: 'vm'
                 }
             }
         ];
     }
+
 
 })();

@@ -72,7 +72,7 @@ gulp.task('templatecache', function() {
         .pipe(plug.angularTemplatecache('templates.js', {
             module: 'app.core',
             standalone: false,
-            root: 'app/'
+            root: 'src/app/'
         }))
         .pipe(gulp.dest(paths.build + 'js/'));
 });

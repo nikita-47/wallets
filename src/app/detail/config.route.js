@@ -17,7 +17,7 @@
                 state: 'detail',
                 config: {
                     url: '/user?id',
-                    templateUrl: 'app/detail/detail.html',
+                    templateUrl: 'src/app/detail/detail.html',
                     controller: 'Detail',
                     controllerAs: 'vm'
                 }

@@ -17,7 +17,7 @@
                 state: 'transactions',
                 config: {
                     url: '/user/transactions?id',
-                    templateUrl: 'app/transactions/transactions.html',
+                    templateUrl: 'src/app/transactions/transactions.html',
                     controller: 'Transactions',
                     controllerAs: 'vm'
                 }
