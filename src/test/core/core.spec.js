@@ -16,6 +16,7 @@ describe('Testing Dataservice', function() {
 
     }));
 
+
     it('should be ready', inject(function ($timeout) {
 
         var prime = dataservice.ready();
@@ -24,6 +25,7 @@ describe('Testing Dataservice', function() {
         expect(prime.$$state.status).toBe(1);
 
     }));
+
 
     it('should get users', function() {
 
@@ -34,6 +36,7 @@ describe('Testing Dataservice', function() {
 
     });
 
+
     it('should get one user', function() {
 
         var getUserUrl = baseUrl + '/users/' + userId;
@@ -42,6 +45,7 @@ describe('Testing Dataservice', function() {
         expect($httpBackend.flush).not.toThrow();
 
     });
+
 
     it('should update user', function() {
 
@@ -52,6 +56,7 @@ describe('Testing Dataservice', function() {
 
     });
 
+
     it('should create user', function() {
 
         var postUserUrl = baseUrl + '/users';
@@ -60,6 +65,7 @@ describe('Testing Dataservice', function() {
         expect($httpBackend.flush).not.toThrow();
 
     });
+
 
     it('should create recharge', function() {
 
@@ -75,6 +81,7 @@ describe('Testing Dataservice', function() {
         expect($httpBackend.flush).not.toThrow();
 
     });
+
 
     it('should get transaction one user', function() {
 
@@ -92,12 +99,4 @@ describe('Testing Dataservice', function() {
 
     });
 
-    // it('should return full name', function() {
-    //     // a) "Given" this user...
-    //     var user = {firstName: "Dave", lastName: "Ceddia"};
-    //
-    //     // b) "When" we call getFullName,
-    //     // c) "Then" it should return the user's name
-    //     expect(userApi.getFullName(user)).toEqual("Dave Ceddia");
-    // });
 });

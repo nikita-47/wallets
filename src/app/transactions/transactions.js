@@ -21,6 +21,8 @@
         }
 
         function activate() {
+
+            // Default params
             vm.params = {
                 datetimeFrom: moment()
                     .subtract(7, 'days')
@@ -32,31 +34,7 @@
                 transType: null
             };
 
-            vm.types = [
-                {
-                    name: 'No selection'
-                },
-                {
-                    value: 'payment',
-                    name: 'Payment'
-                },
-                {
-                    value: 'coupon',
-                    name: 'Coupon'
-                },
-                {
-                    value: 'inGamePurchase',
-                    name: 'In game purchase'
-                },
-                {
-                    value: 'internal',
-                    name: 'Internal'
-                },
-                {
-                    value: 'cancellation',
-                    name: 'Cancellation'
-                }
-            ];
+            vm.types = $injector.get('transTypes');
 
             angular.element($document).ready(function () {
                 initRangePicker();
@@ -66,7 +44,7 @@
             loadTransactions();
         }
 
-
+        // Better to do it in separate directive
         function initRangePicker() {
             var rangeStart = $('#rangeStart');
             var rangeEnd = $('#rangeEnd');

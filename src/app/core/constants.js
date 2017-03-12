@@ -7,6 +7,31 @@
         .constant('baseUrl', 'https://livedemo.xsolla.com/fe/test-task/baev')
         .constant('transDateTimeFormat', 'YYYY-MM-DD HH:mm')
         .constant('moment', moment)
+        .constant('transTypes', [
+            {
+                name: 'No selection'
+            },
+            {
+                value: 'payment',
+                name: 'Payment'
+            },
+            {
+                value: 'coupon',
+                name: 'Coupon'
+            },
+            {
+                value: 'inGamePurchase',
+                name: 'In game purchase'
+            },
+            {
+                value: 'internal',
+                name: 'Internal'
+            },
+            {
+                value: 'cancellation',
+                name: 'Cancellation'
+            }
+        ])
         .constant('emailRegexp', new RegExp(
             [
                 '^',

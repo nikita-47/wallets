@@ -20,13 +20,15 @@ describe("loader", function () {
         $rootScope.$digest();
     }));
 
+
     it("should have active class", function () {
         expect(element.hasClass('active')).toBe(false);
     });
 
+
     it("shouldn't have active class", inject(function($timeout) {
         scope.vm = {
-            isLoading: false,
+            isLoading: false
         };
 
         $timeout.flush();

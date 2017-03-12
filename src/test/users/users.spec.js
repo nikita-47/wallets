@@ -13,18 +13,22 @@ describe("Testing Users", function () {
         baseUrl = $injector.get('baseUrl');
     }));
 
+
     it("should have a empty user list", function() {
         expect(Ctrl.users).toEqual([]);
     });
+
 
     it("should have a 5 users per page", function() {
         expect(Ctrl.pageParams.limit).toEqual(5);
     });
 
+
     it("should have a 10 offset", function() {
         Ctrl.setPage(2);
         expect(Ctrl.pageParams.offset).toEqual(10);
     });
+
 
     it("should have a 30 offset", function() {
         Ctrl.selectPerPage(15);
@@ -32,10 +36,12 @@ describe("Testing Users", function () {
         expect(Ctrl.pageParams.offset).toEqual(30);
     });
 
+
     it("should have a 15 users per page", function() {
         Ctrl.selectPerPage(15);
         expect(Ctrl.pageParams.limit).toEqual(15);
     });
+
 
     it("should create users request", inject(function($timeout) {
 
@@ -59,6 +65,7 @@ describe("Testing Users", function () {
         expect($httpBackend.flush).not.toThrow();
 
     }));
+
 
     it("should open user detail", inject(function($state) {
         var userId = 0;

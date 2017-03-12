@@ -27,10 +27,12 @@ describe("Testing Detail", function () {
         spyOn($state, 'go');
     }));
 
+
     it("should init detail with id unit", function () {
         expect(Ctrl.user.user_id).toEqual('');
         expect(Ctrl.id).toEqual(userId);
     });
+
 
     it("should expect loading", inject(function ($timeout) {
         var getUserUrl = baseUrl + '/users/' + userId;
@@ -39,6 +41,7 @@ describe("Testing Detail", function () {
         $timeout.verifyNoPendingTasks();
         expect($httpBackend.flush).not.toThrow();
     }));
+
 
     it("should create recharge", inject(function ($timeout) {
 
@@ -99,6 +102,7 @@ describe("Testing Detail", function () {
 
     }));
 
+
     it("shouldn't submit user", function () {
         var user = {
             user_id: null,
@@ -137,6 +141,7 @@ describe("Testing Detail", function () {
         expect($state.go).toHaveBeenCalledWith('detail', {id: userId});
 
     }));
+
 
     it("should update user", inject(function ($timeout) {
 
