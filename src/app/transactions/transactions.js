@@ -39,11 +39,6 @@
 
             vm.types = $injector.get('transTypes');
 
-            angular.element($document).ready(function () {
-                initRangePicker();
-                $('.dropdown').dropdown();
-            });
-
             loadTransactions();
         }
 
@@ -118,6 +113,8 @@
                 )
                 .finally(function () {
                     vm.isLoading = false;
+                    initRangePicker();
+                    $('.dropdown').dropdown();
                 });
 
         }
