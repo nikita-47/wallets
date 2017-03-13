@@ -9,6 +9,7 @@
     function Transactions(dataservice, $stateParams, $document, $injector) {
         var vm = this;
         var moment = $injector.get('moment');
+        var $timeout = $injector.get('$timeout');
         var dateTimeFormat = $injector.get('transDateTimeFormat');
 
         vm.id = $stateParams.id;
@@ -40,8 +41,10 @@
             vm.types = $injector.get('transTypes');
 
             angular.element($document).ready(function () {
-                initRangePicker();
-                $('.dropdown').dropdown();
+                $timeout(function () {
+                    initRangePicker();
+                    $('.dropdown').dropdown();
+                });
             });
 
             loadTransactions();
