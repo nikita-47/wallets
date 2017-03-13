@@ -33,9 +33,10 @@ Also, you can use this application at [GitHub Pages](https://nikitabonachev.gith
  
 ##Testing
  
- Manual testing (check-list).
- Unit-tests (Jasmine.js + Karma + Several browsers). 
+ - Manual testing (check-list).
+ - Unit-tests (Jasmine.js + Karma + Several browsers). 
  To run unit-tests: `npm install -g karma-cli` and then `karma start`.
+ Then you can visit `coverage` folder to see the result.
  
 ## My mark 8/10
  

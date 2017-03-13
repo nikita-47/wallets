@@ -71,7 +71,8 @@ module.exports = function (config) {
             'PhantomJS',
             'Firefox',
             'Opera',
-            'Chrome'
+            'Chrome',
+            'IE'
         ],
 
 
