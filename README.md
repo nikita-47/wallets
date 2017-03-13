@@ -14,34 +14,33 @@ npm install
 bower install
 gulp dev
 ```
-Then visit [http://localhost:8000/index.html#/users](http://localhost:8000/index.html#/users).
-
-Unfortunately, after `gulp dev` at first time you may see a crush. Please, repeat `gulp dev`.
-
+Then visit [http://localhost:8888/](http://localhost:8888/).
 Also, you can use this application at [GitHub Pages](https://nikitabonachev.github.io/wallets/#/users). 
  
 ##What I've used
- - [Angular 1.5](https://angularjs.org/)
+ - [Angular 1.6](https://angularjs.org/)
  - [Semantic UI](http://semantic-ui.com/)
  - [Moment.js](https://momentjs.com/)
+ - [Toastr](http://codeseven.github.io/toastr/)
  
 ##Browser support
  I have tested on following desktop latest versions: 
  - Google Chrome (Mac and Windows)
  - Opera (Mac and Windows)
  - Mozilla Firefox (Mac and Windows)
- - Safari (small problem with margin at the button)
- - IE 11 (small problem with padding in the last cell at user-list)
+ - Safari
+ - IE 11
  
 ##Testing
  
- Only manual testing (check-list). I know, that better do a unit-testing, but I didn't implement it.
+ Manual testing (check-list).
+ Unit-tests (Jasmine.js + Karma + Several browsers). 
+ To run unit-tests: `npm install -g karma-cli` and then `karma start`.
  
-## My mark 6/10
+## My mark 8/10
  
  Why not 10:
  
- * Crush after first time `gulp dev`.
- * Small problems in Safari and IE 11.
- * Bug with range date picker at transaction list (incorrect dates).
- * No unit-tests
+ * Better to implement range-picker on separate directive
+ * One deprecation warning with my range-picker
+ * No mobile version
